@@ -118,6 +118,13 @@ export default {
 				'typing': {
 					'from': { width: '0' },
 					'to': { width: '100%' }
+				},
+				'glitch': {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'20%': { transform: 'translateX(-2px)' },
+					'40%': { transform: 'translateX(2px)' },
+					'60%': { transform: 'translateX(-1px)' },
+					'80%': { transform: 'translateX(1px)' }
 				}
 			},
 			animation: {
@@ -132,7 +139,8 @@ export default {
 				'matrix-fall': 'matrix-fall 10s linear infinite',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
-				'typing': 'typing 3.5s steps(40, end)'
+				'typing': 'typing 3.5s steps(40, end)',
+				'glitch': 'glitch 0.5s ease-in-out'
 			},
 		}
 	},

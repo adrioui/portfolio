@@ -121,4 +121,19 @@
   .developer-mode {
     @apply fixed inset-0 bg-black/90 z-50 overflow-hidden pointer-events-none;
   }
+  
+  /* Project Detail Styles */
+  .project-detail {
+    @apply font-mono;
+  }
+  
+  .project-detail pre {
+    @apply whitespace-pre-wrap break-all;
+  }
+  
+  .project-detail h1, 
+  .project-detail h2 {
+    @apply font-mono;
+  }
 }
+
