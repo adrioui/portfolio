@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
 
 interface ProjectCardProps {
   title: string;
@@ -10,7 +9,7 @@ interface ProjectCardProps {
   catReview: string;
   stressLevel: number; // 0-5
   className?: string;
-  id: string; // Added project ID for routing
+  onClick?: () => void;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -20,17 +19,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   catReview,
   stressLevel,
   className,
-  id,
+  onClick,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const stressEmojis = Array(5).fill('☁️').map((emoji, index) => index < stressLevel ? '🔥' : emoji);
 
   return (
-    <Link 
-      to={`/project/${id}`}
-      className={cn("project-card group block", className)}
+    <div 
+      className={cn("project-card group cursor-pointer", className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       <div className="flex justify-between items-center mb-3">
         <h3 className="font-mono text-lg font-medium">{title}</h3>
@@ -71,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -1,30 +1,30 @@
 
 import React, { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
-export const CatScrollIndicator: React.FC = () => {
-  const [scrollPercent, setScrollPercent] = useState(0);
-  const [mouseX, setMouseX] = useState(0);
-  const [isCatChasing, setIsCatChasing] = useState(false);
-  const [catPosition, setCatPosition] = useState({ x: 0, y: 0 });
+interface CatScrollIndicatorProps {
+  className?: string;
+}
+
+const CatScrollIndicator: React.FC<CatScrollIndicatorProps> = ({ className }) => {
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [catPosition, setCatPosition] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const newScrollPercent = scrollTop / docHeight;
-      setScrollPercent(newScrollPercent);
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const percentage = (scrollTop / scrollHeight) * 100;
+      setScrollPercentage(percentage || 0);
+      setCatPosition(percentage || 0);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const newMouseX = (e.clientX / window.innerWidth) * 100;
-      setMouseX(newMouseX);
-      
-      // Only chase the cursor when it's more than 10% away from the cat
-      if (Math.abs(newMouseX - catPosition.x) > 10) {
-        setIsCatChasing(true);
-      } else {
-        setIsCatChasing(false);
-      }
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: e.clientY,
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -34,39 +34,33 @@ export const CatScrollIndicator: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [catPosition.x]);
+  }, []);
 
-  // Update cat position to follow mouse with delay
+  // Make cat chase the mouse when close to progress bar
   useEffect(() => {
-    if (isCatChasing) {
-      const chaseInterval = setInterval(() => {
+    const shouldChase = Math.abs(mousePosition.x - catPosition) < 20;
+    
+    if (shouldChase) {
+      const timeout = setTimeout(() => {
         setCatPosition(prev => {
-          const direction = prev.x < mouseX ? 1 : -1;
-          return { 
-            x: prev.x + direction * 2,
-            y: scrollPercent * 100
-          };
+          const newPos = prev + (mousePosition.x > prev ? 2 : -2);
+          return Math.max(0, Math.min(100, newPos));
         });
       }, 50);
-
-      return () => clearInterval(chaseInterval);
+      
+      return () => clearTimeout(timeout);
     }
-  }, [isCatChasing, mouseX, scrollPercent]);
+  }, [mousePosition, catPosition]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 bg-border z-50">
+    <div className={cn("fixed bottom-0 left-0 right-0 h-1 bg-border", className)}>
       <div 
-        className="h-full bg-highlight"
-        style={{ width: `${scrollPercent * 100}%` }}
+        className="h-full bg-highlight relative" 
+        style={{ width: `${scrollPercentage}%` }}
       >
-        <div
-          className="absolute font-mono text-xs transition-all duration-300"
-          style={{ 
-            left: `${catPosition.x}%`,
-            top: '0px',
-            transform: `translateX(-50%) ${isCatChasing ? 'scale(1.2)' : 'scale(1)'}`,
-            animation: isCatChasing ? 'wiggle 0.5s infinite' : 'none'
-          }}
+        <div 
+          className="absolute top-[-12px] text-sm transition-all duration-75"
+          style={{ left: `${catPosition}%` }}
         >
           🐈
         </div>
@@ -74,3 +68,5 @@ export const CatScrollIndicator: React.FC = () => {
     </div>
   );
 };
+
+export default CatScrollIndicator;

@@ -122,41 +122,18 @@
     @apply fixed inset-0 bg-black/90 z-50 overflow-hidden pointer-events-none;
   }
   
-  /* Cursor typing effect */
-  .cursor-typing {
-    position: relative;
-    display: inline-block;
+  /* Project Detail Styles */
+  .project-detail {
+    @apply font-mono;
   }
   
-  .cursor-typing::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: type 2s steps(30, end) forwards;
+  .project-detail pre {
+    @apply whitespace-pre-wrap break-all;
   }
   
-  .cursor-typing::before {
-    content: '|';
-    position: absolute;
-    right: 0;
-    animation: blink 0.75s step-end infinite, moveRight 2s steps(30, end) forwards;
+  .project-detail h1, 
+  .project-detail h2 {
+    @apply font-mono;
   }
-  
-  @keyframes type {
-    to { width: 100%; }
-  }
-  
-  @keyframes moveRight {
-    to { right: -10px; }
-  }
-}
-
-@keyframes blink {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
 }
 
