@@ -9,7 +9,6 @@ interface ProjectCardProps {
   catReview: string;
   stressLevel: number; // 0-5
   className?: string;
-  onClick?: () => void;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -19,17 +18,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   catReview,
   stressLevel,
   className,
-  onClick,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const stressEmojis = Array(5).fill('☁️').map((emoji, index) => index < stressLevel ? '🔥' : emoji);
 
   return (
     <div 
-      className={cn("project-card group cursor-pointer", className)}
+      className={cn("project-card group", className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick}
     >
       <div className="flex justify-between items-center mb-3">
         <h3 className="font-mono text-lg font-medium">{title}</h3>
