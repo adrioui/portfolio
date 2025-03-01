@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { Terminal } from '@/components/Terminal';
+import Terminal from '@/components/Terminal';
 
 interface TechStack {
   name: string;
@@ -51,14 +50,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
   const [activeCursorIndex, setActiveCursorIndex] = useState<number | null>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
-  // Glitch effect
   useEffect(() => {
     if (!isGlitching) return;
     
     const originalTitle = title;
     const glitchInterval = setInterval(() => {
       const chars = originalTitle.split('');
-      // Randomly swap some characters
       for (let i = 0; i < Math.min(3, chars.length / 3); i++) {
         const idx1 = Math.floor(Math.random() * chars.length);
         const idx2 = Math.floor(Math.random() * chars.length);
@@ -67,7 +64,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
       setDisplayTitle(chars.join(''));
     }, 50);
     
-    // Stop after 500ms
     const timeout = setTimeout(() => {
       clearInterval(glitchInterval);
       setDisplayTitle(originalTitle);
@@ -80,7 +76,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
     };
   }, [isGlitching, title]);
 
-  // Triple click to toggle retro theme
   useEffect(() => {
     if (titleClicks === 3) {
       setRetro(prev => !prev);
@@ -88,7 +83,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
     }
   }, [titleClicks]);
 
-  // Store bugs in localStorage
   useEffect(() => {
     localStorage.setItem('header-bugs', JSON.stringify(headerBugs));
   }, [headerBugs]);
@@ -96,7 +90,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
   const handleTitleClick = () => {
     setTitleClicks(prev => prev + 1);
     
-    // Reset after 500ms if not triple clicked
     setTimeout(() => {
       setTitleClicks(0);
     }, 500);
@@ -113,7 +106,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
   const stressEmojis = Array(5).fill('☁️').map((emoji, index) => index < stressLevel ? '🔥' : emoji);
 
-  // Check for cat-tax flag in the text
   useEffect(() => {
     if (overview.includes('--cat-tax')) {
       setShowCatTax(true);
@@ -126,7 +118,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
       retro && "bg-black text-green-400",
       className
     )}>
-      {/* Title with glitch effect */}
       <h1 
         ref={titleRef}
         className={cn(
@@ -139,7 +130,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
         {displayTitle}
       </h1>
       
-      {/* Overview as terminal command */}
       <div className="mb-10">
         <h2 
           className="text-xl mb-3 font-bold" 
@@ -153,7 +143,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
         />
       </div>
       
-      {/* ASCII Art */}
       <div className="mb-10">
         <h2 
           className="text-xl mb-3 font-bold"
@@ -171,7 +160,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
         </pre>
       </div>
       
-      {/* Tech Stack */}
       <div className="mb-10">
         <h2 
           className="text-xl mb-3 font-bold"
@@ -214,7 +202,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
         </div>
       </div>
       
-      {/* Challenges */}
       <div className="mb-10">
         <h2 
           className="text-xl mb-3 font-bold"
@@ -256,8 +243,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
           ))}
         </div>
       </div>
-
-      {/* Stress Level */}
+      
       <div className="mb-10">
         <h2 
           className="text-xl mb-3 font-bold"
@@ -283,7 +269,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
         </div>
       </div>
       
-      {/* Demo Link */}
       {demoLink && (
         <div className="mb-10">
           <h2 
@@ -306,7 +291,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
         </div>
       )}
       
-      {/* Cat Tax Easter Egg */}
       {showCatTax && (
         <div className="mt-10 p-4 border border-dashed rounded-sm">
           <h2 className="text-lg mb-2">🐱 Cat Tax Unlocked!</h2>
