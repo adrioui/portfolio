@@ -4,6 +4,8 @@ import Terminal from '@/components/Terminal';
 import ProjectCard from '@/components/ProjectCard';
 import ScrollIndicator from '@/components/ScrollIndicator';
 import SkillBar from '@/components/SkillBar';
+import ThemeToggle from '@/components/ThemeToggle';
+import { Toaster } from '@/components/ui/toaster';
 import { initAnimations } from '@/utils/animations';
 import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
 
@@ -33,6 +35,8 @@ const Index = () => {
 
   return (
     <div ref={pageRef} className="min-h-screen bg-background">
+      <ThemeToggle />
+      <Toaster />
       <ScrollIndicator sections={sections} />
 
       {/* Main content with exaggerated margins */}
@@ -67,7 +71,7 @@ const Index = () => {
 
           {/* Pixel art avatar */}
           <div className="mt-16 w-16 h-16 relative animate-float">
-            <div className="w-full h-full bg-black/10 rounded-sm grid grid-cols-8 grid-rows-8 overflow-hidden">
+            <div className="w-full h-full bg-black/10 dark:bg-white/10 rounded-sm grid grid-cols-8 grid-rows-8 overflow-hidden">
               {/* Simple pixel art face */}
               <div className="col-start-3 col-span-1 row-start-3 row-span-1 bg-highlight"></div>
               <div className="col-start-6 col-span-1 row-start-3 row-span-1 bg-highlight"></div>
