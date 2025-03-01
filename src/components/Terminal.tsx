@@ -107,7 +107,7 @@ const Terminal: React.FC<TerminalProps> = ({
   }, [currentTextIndex, currentCommandIndex, commands, typing, glitchProbability, typingSpeed, initialDelay, isGlitching]);
 
   return (
-    <div className={cn("bg-black/5 p-4 rounded-sm font-mono text-sm sm:text-base mx-auto max-w-full", className)}>
+    <div className={cn("bg-black/5 p-4 rounded-sm font-mono text-sm sm:text-base", className)}>
       <div className="flex gap-1.5 mb-3">
         <div className="w-2.5 h-2.5 rounded-full bg-destructive"></div>
         <div className="w-2.5 h-2.5 rounded-full bg-softgray"></div>
