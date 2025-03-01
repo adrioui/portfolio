@@ -19,7 +19,7 @@ const Index = () => {
   // Terminal commands for the hero section
   const terminalCommands = [
     "whoami",
-    "Max",
+    "[Max]",
     "Job: Building things that (sometimes) work",
     "Location: [redacted] • ☕ Infinite coffee mode"
   ];
@@ -39,39 +39,48 @@ const Index = () => {
       <div className="mx-auto px-8 md:px-16 lg:px-32 xl:px-40 max-w-7xl">
         {/* Hero Section */}
         <section id="hero" className="min-h-screen flex flex-col justify-center py-20">
-          <div className="mb-6">
-            <span 
-              onClick={handleNameClick}
-              className="text-sm inline-block px-2 py-1 bg-highlight/20 text-foreground rounded-sm mb-2 cursor-pointer hover:bg-highlight/30 transition-colors"
-            >
-              Software Engineer
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-4">
-              Hi, I'm <span className="relative text-highlight cursor-pointer" onClick={handleNameClick}>Max</span>
-            </h1>
-            <p className="text-softgray text-lg md:text-xl max-w-2xl leading-relaxed">
-              I build digital experiences with clean code and a touch of whimsy. Sometimes they even work.
-            </p>
-          </div>
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-16">
+            {/* Left side with pixel art avatar */}
+            <div className="w-48 h-48 relative animate-float">
+              <div className="w-full h-full grid grid-cols-10 grid-rows-10 overflow-hidden">
+                {/* Pixel art face - improved version */}
+                {/* Hair */}
+                <div className="col-span-10 row-span-2 bg-gray-900"></div>
+                {/* Face */}
+                <div className="col-span-8 col-start-2 row-span-4 row-start-2 bg-[#F4D6B0]"></div>
+                {/* Eyes */}
+                <div className="col-start-3 col-span-1 row-start-3 row-span-1 bg-gray-900"></div>
+                <div className="col-start-6 col-span-1 row-start-3 row-span-1 bg-gray-900"></div>
+                {/* Mouth */}
+                <div className="col-start-4 col-span-2 row-start-5 row-span-1 bg-[#E35D6A]"></div>
+                {/* Shirt/body */}
+                <div className="col-span-6 col-start-3 row-span-3 row-start-7 bg-[#F3D371]"></div>
+              </div>
+            </div>
 
-          <Terminal 
-            commands={terminalCommands} 
-            className="mt-12 max-w-2xl" 
-            typingSpeed={40}
-          />
+            {/* Right side with terminal and bio */}
+            <div className="flex-1 flex flex-col gap-12">
+              {/* Terminal with updated styling */}
+              <Terminal 
+                commands={terminalCommands} 
+                className="w-full max-w-lg bg-black rounded-md overflow-hidden border border-gray-800" 
+                typingSpeed={40}
+              />
 
-          <div className="mt-16 flex flex-col md:flex-row gap-6">
-            <a href="#projects" className="link-hover">View Projects</a>
-            <a href="#contact" className="link-hover">Get in Touch</a>
-          </div>
-
-          {/* Pixel art avatar */}
-          <div className="mt-16 w-16 h-16 relative animate-float">
-            <div className="w-full h-full bg-black/10 rounded-sm grid grid-cols-8 grid-rows-8 overflow-hidden">
-              {/* Simple pixel art face */}
-              <div className="col-start-3 col-span-1 row-start-3 row-span-1 bg-highlight"></div>
-              <div className="col-start-6 col-span-1 row-start-3 row-span-1 bg-highlight"></div>
-              <div className="col-start-3 col-span-4 row-start-5 row-span-1 bg-highlight"></div>
+              {/* Bio text - longer version from the image */}
+              <div className="max-w-xl text-softgray text-lg leading-relaxed">
+                <p>
+                  I craft digital experiences with clean code and quirky interactions. When I'm not 
+                  debugging, you'll find me overanalyzing coffee brewing variables or collecting vintage 
+                  keyboards that I definitely don't need.
+                </p>
+                
+                <div className="mt-10 flex gap-8">
+                  <a href="#projects" className="link-hover text-foreground">See my work</a>
+                  <span className="text-softgray">•</span>
+                  <a href="#contact" className="link-hover text-foreground">Let's talk</a>
+                </div>
+              </div>
             </div>
           </div>
         </section>

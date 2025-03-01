@@ -107,26 +107,32 @@ const Terminal: React.FC<TerminalProps> = ({
   }, [currentTextIndex, currentCommandIndex, commands, typing, glitchProbability, typingSpeed, initialDelay, isGlitching]);
 
   return (
-    <div className={cn("bg-black/5 p-4 rounded-sm font-mono text-sm sm:text-base", className)}>
-      <div className="flex gap-1.5 mb-3">
-        <div className="w-2.5 h-2.5 rounded-full bg-destructive"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-softgray"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-highlight"></div>
+    <div className={cn("bg-black rounded-md overflow-hidden", className)}>
+      {/* Terminal top bar with colored dots */}
+      <div className="bg-black px-4 py-2 border-b border-gray-800 flex items-center">
+        <div className="flex gap-2 items-center">
+          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <div className="text-gray-500 text-sm ml-4 font-mono">terminal</div>
       </div>
-      <div className="terminal-content">
+      
+      {/* Terminal content */}
+      <div className="p-4 font-mono text-sm sm:text-base">
         {displayedCommands.map((command, index) => (
           <div key={index} className="mb-1 flex">
-            <span className="text-highlight mr-2">$</span>
-            <span>{command}</span>
+            <span className="text-[#84cc16] mr-2">$</span>
+            <span className="text-[#84cc16]">{command}</span>
             {index === currentCommandIndex && showCursor && (
-              <span className="animate-blink ml-px">_</span>
+              <span className="animate-blink ml-px text-[#84cc16]">_</span>
             )}
           </div>
         ))}
         {currentCommandIndex < commands.length && displayedCommands.length <= currentCommandIndex && (
           <div className="flex">
-            <span className="text-highlight mr-2">$</span>
-            {showCursor && <span className="animate-blink">_</span>}
+            <span className="text-[#84cc16] mr-2">$</span>
+            {showCursor && <span className="animate-blink text-[#84cc16]">_</span>}
           </div>
         )}
       </div>
