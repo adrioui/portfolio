@@ -46,7 +46,7 @@ const SkillBar: React.FC<SkillBarProps> = ({
   return (
     <div 
       ref={skillRef}
-      className={cn("mb-4", className)}
+      className={cn("mb-4 mx-auto max-w-md", className)}
       onMouseEnter={() => setShowLabel(true)}
       onMouseLeave={() => setShowLabel(false)}
     >

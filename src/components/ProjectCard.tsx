@@ -24,7 +24,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <div 
-      className={cn("project-card group", className)}
+      className={cn("project-card group mx-auto", className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
