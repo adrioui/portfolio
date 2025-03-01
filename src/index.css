@@ -162,4 +162,15 @@
   .container-center {
     @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl;
   }
+  
+  /* Project Detail Scroll Progress */
+  .project-detail-progress {
+    @apply fixed top-0 left-0 h-1 z-[100] bg-highlight;
+    transition: width 0.1s ease-out;
+  }
+  
+  .project-detail-progress.cat-mode::after {
+    content: "🐈";
+    @apply absolute -right-4 -top-1 text-xs animate-bounce;
+  }
 }
