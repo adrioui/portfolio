@@ -67,12 +67,6 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-			gridTemplateColumns: {
-				'16': 'repeat(16, minmax(0, 1fr))',
-			},
-			gridTemplateRows: {
-				'16': 'repeat(16, minmax(0, 1fr))',
-			},
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0' },
