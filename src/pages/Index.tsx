@@ -60,18 +60,40 @@ const Index = () => {
             typingSpeed={40}
           />
 
-          <div className="mt-16 flex flex-col md:flex-row gap-6">
-            <a href="#projects" className="link-hover">View Projects</a>
-            <a href="#contact" className="link-hover">Get in Touch</a>
+          <div className="mt-16 flex flex-col md:flex-row items-center justify-center">
+            <a href="#projects" className="link-hover mx-3">View Projects</a>
+            <a href="#contact" className="link-hover mx-3">Get in Touch</a>
           </div>
 
-          {/* Pixel art avatar */}
-          <div className="mt-16 w-16 h-16 relative animate-float">
-            <div className="w-full h-full bg-black/10 rounded-sm grid grid-cols-8 grid-rows-8 overflow-hidden">
-              {/* Simple pixel art face */}
-              <div className="col-start-3 col-span-1 row-start-3 row-span-1 bg-highlight"></div>
-              <div className="col-start-6 col-span-1 row-start-3 row-span-1 bg-highlight"></div>
-              <div className="col-start-3 col-span-4 row-start-5 row-span-1 bg-highlight"></div>
+          {/* Detailed pixel art avatar */}
+          <div className="mt-16 w-32 h-32 relative animate-float">
+            <div className="w-full h-full bg-black/10 rounded-sm grid grid-cols-16 grid-rows-16 overflow-hidden">
+              {/* Background */}
+              <div className="col-span-16 row-span-16 bg-[#221F26]"></div>
+              
+              {/* Hair */}
+              <div className="col-start-5 col-span-8 row-start-2 row-span-3 bg-[#403E43]"></div>
+              <div className="col-start-4 col-span-10 row-start-5 row-span-1 bg-[#403E43]"></div>
+              
+              {/* Face */}
+              <div className="col-start-5 col-span-8 row-start-5 row-span-6 bg-[#FDE1D3]"></div>
+              
+              {/* Eyes */}
+              <div className="col-start-6 col-span-2 row-start-7 row-span-1 bg-[#221F26]"></div>
+              <div className="col-start-10 col-span-2 row-start-7 row-span-1 bg-[#221F26]"></div>
+              
+              {/* Smile */}
+              <div className="col-start-7 col-span-4 row-start-9 row-span-1 bg-[#221F26]"></div>
+              <div className="col-start-6 col-span-1 row-start-8 row-span-1 bg-[#221F26]"></div>
+              <div className="col-start-11 col-span-1 row-start-8 row-span-1 bg-[#221F26]"></div>
+              
+              {/* Glasses */}
+              <div className="col-start-5 col-span-3 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
+              <div className="col-start-9 col-span-3 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
+              <div className="col-start-8 col-span-1 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
+              
+              {/* Shirt */}
+              <div className="col-start-4 col-span-10 row-start-11 row-span-4 bg-[#8B5CF6]"></div>
             </div>
           </div>
         </section>
