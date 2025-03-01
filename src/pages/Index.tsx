@@ -75,9 +75,9 @@ const Index = () => {
                   keyboards that I definitely don't need.
                 </p>
                 
-                <div className="mt-10 flex gap-8">
+                <div className="mt-10 flex items-center">
                   <a href="#projects" className="link-hover text-foreground">See my work</a>
-                  <span className="text-softgray">•</span>
+                  <span className="text-softgray mx-4">•</span>
                   <a href="#contact" className="link-hover text-foreground">Let's talk</a>
                 </div>
               </div>
