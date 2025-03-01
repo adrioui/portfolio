@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 interface ProjectCardProps {
   title: string;
@@ -9,6 +10,7 @@ interface ProjectCardProps {
   catReview: string;
   stressLevel: number; // 0-5
   className?: string;
+  id: string; // Added project ID for routing
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -18,13 +20,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   catReview,
   stressLevel,
   className,
+  id,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const stressEmojis = Array(5).fill('☁️').map((emoji, index) => index < stressLevel ? '🔥' : emoji);
 
   return (
-    <div 
-      className={cn("project-card group", className)}
+    <Link 
+      to={`/project/${id}`}
+      className={cn("project-card group block", className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -67,7 +71,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
