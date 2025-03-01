@@ -84,6 +84,7 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ProjectCard
+              id="pixel-perfect"
               title="Pixel Perfect"
               emojis={['🖼️', '⚡', '🪄']}
               description="A brutalist image editor that uses machine learning to predict what you're trying to draw."
@@ -92,6 +93,7 @@ const Index = () => {
             />
             
             <ProjectCard
+              id="terminal-tunes"
               title="Terminal Tunes"
               emojis={['🎵', '💻', '🎮']}
               description="CLI music player that visualizes audio as ASCII art patterns in your terminal."
@@ -100,6 +102,7 @@ const Index = () => {
             />
             
             <ProjectCard
+              id="recursive-recipes"
               title="Recursive Recipes"
               emojis={['🍳', '🔄', '🤖']}
               description="Recipe generator that creates increasingly absurd cooking instructions the more you use it."
@@ -108,6 +111,7 @@ const Index = () => {
             />
             
             <ProjectCard
+              id="error-handler"
               title="Error Handler"
               emojis={['🐛', '🔍', '🧠']}
               description="Turns cryptic stack traces into sarcastic, but actually helpful explanations."
