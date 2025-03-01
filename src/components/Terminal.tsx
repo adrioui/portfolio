@@ -107,26 +107,26 @@ const Terminal: React.FC<TerminalProps> = ({
   }, [currentTextIndex, currentCommandIndex, commands, typing, glitchProbability, typingSpeed, initialDelay, isGlitching]);
 
   return (
-    <div className={cn("bg-black/5 p-4 rounded-sm font-mono text-sm sm:text-base", className)}>
+    <div className={cn("p-4 rounded-sm font-mono text-sm sm:text-base", className)}>
       <div className="flex gap-1.5 mb-3">
         <div className="w-2.5 h-2.5 rounded-full bg-destructive"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-softgray"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-highlight"></div>
+        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+        <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
       </div>
       <div className="terminal-content">
         {displayedCommands.map((command, index) => (
           <div key={index} className="mb-1 flex">
-            <span className="text-highlight mr-2">$</span>
-            <span>{command}</span>
+            <span className="text-green-500 mr-2">$</span>
+            <span className="text-green-500">{command}</span>
             {index === currentCommandIndex && showCursor && (
-              <span className="animate-blink ml-px">_</span>
+              <span className="animate-blink ml-px text-green-500">_</span>
             )}
           </div>
         ))}
         {currentCommandIndex < commands.length && displayedCommands.length <= currentCommandIndex && (
           <div className="flex">
-            <span className="text-highlight mr-2">$</span>
-            {showCursor && <span className="animate-blink">_</span>}
+            <span className="text-green-500 mr-2">$</span>
+            {showCursor && <span className="animate-blink text-green-500">_</span>}
           </div>
         )}
       </div>

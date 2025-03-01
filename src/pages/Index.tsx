@@ -19,7 +19,7 @@ const Index = () => {
   // Terminal commands for the hero section
   const terminalCommands = [
     "whoami",
-    "Max",
+    "[Max]",
     "Job: Building things that (sometimes) work",
     "Location: [redacted] • ☕ Infinite coffee mode"
   ];
@@ -49,52 +49,63 @@ const Index = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-4">
               Hi, I'm <span className="relative text-highlight cursor-pointer" onClick={handleNameClick}>Max</span>
             </h1>
-            <p className="text-softgray text-lg md:text-xl max-w-2xl leading-relaxed">
-              I build digital experiences with clean code and a touch of whimsy. Sometimes they even work.
+          </div>
+
+          {/* New layout: Avatar and Terminal side by side */}
+          <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-6 md:gap-12 lg:gap-20 mt-12">
+            {/* Pixel art avatar on the left */}
+            <div className="w-32 h-32 relative animate-float">
+              <div className="w-full h-full bg-black/10 rounded-sm grid grid-cols-16 grid-rows-16 overflow-hidden">
+                {/* Background */}
+                <div className="col-span-16 row-span-16 bg-[#221F26]"></div>
+                
+                {/* Hair */}
+                <div className="col-start-5 col-span-8 row-start-2 row-span-3 bg-[#403E43]"></div>
+                <div className="col-start-4 col-span-10 row-start-5 row-span-1 bg-[#403E43]"></div>
+                
+                {/* Face */}
+                <div className="col-start-5 col-span-8 row-start-5 row-span-6 bg-[#FDE1D3]"></div>
+                
+                {/* Eyes */}
+                <div className="col-start-6 col-span-2 row-start-7 row-span-1 bg-[#221F26]"></div>
+                <div className="col-start-10 col-span-2 row-start-7 row-span-1 bg-[#221F26]"></div>
+                
+                {/* Smile */}
+                <div className="col-start-7 col-span-4 row-start-9 row-span-1 bg-[#221F26]"></div>
+                <div className="col-start-6 col-span-1 row-start-8 row-span-1 bg-[#221F26]"></div>
+                <div className="col-start-11 col-span-1 row-start-8 row-span-1 bg-[#221F26]"></div>
+                
+                {/* Glasses */}
+                <div className="col-start-5 col-span-3 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
+                <div className="col-start-9 col-span-3 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
+                <div className="col-start-8 col-span-1 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
+                
+                {/* Shirt */}
+                <div className="col-start-4 col-span-10 row-start-11 row-span-4 bg-[#8B5CF6]"></div>
+              </div>
+            </div>
+
+            {/* Terminal on the right */}
+            <Terminal 
+              commands={terminalCommands} 
+              className="max-w-md w-full bg-black" 
+              typingSpeed={40}
+            />
+          </div>
+
+          {/* Description text below both elements */}
+          <div className="mt-16 max-w-3xl mx-auto text-center">
+            <p className="text-softgray text-lg md:text-xl leading-relaxed">
+              I craft digital experiences with clean code and quirky interactions. 
+              When I'm not debugging, you'll find me overanalyzing coffee brewing 
+              variables or collecting vintage keyboards that I definitely don't need.
             </p>
           </div>
 
-          <Terminal 
-            commands={terminalCommands} 
-            className="mt-12 max-w-2xl" 
-            typingSpeed={40}
-          />
-
-          <div className="mt-16 flex flex-col md:flex-row items-center justify-center">
+          {/* Navigation links */}
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-center">
             <a href="#projects" className="link-hover mx-3">View Projects</a>
             <a href="#contact" className="link-hover mx-3">Get in Touch</a>
-          </div>
-
-          {/* Detailed pixel art avatar */}
-          <div className="mt-16 w-32 h-32 relative animate-float">
-            <div className="w-full h-full bg-black/10 rounded-sm grid grid-cols-16 grid-rows-16 overflow-hidden">
-              {/* Background */}
-              <div className="col-span-16 row-span-16 bg-[#221F26]"></div>
-              
-              {/* Hair */}
-              <div className="col-start-5 col-span-8 row-start-2 row-span-3 bg-[#403E43]"></div>
-              <div className="col-start-4 col-span-10 row-start-5 row-span-1 bg-[#403E43]"></div>
-              
-              {/* Face */}
-              <div className="col-start-5 col-span-8 row-start-5 row-span-6 bg-[#FDE1D3]"></div>
-              
-              {/* Eyes */}
-              <div className="col-start-6 col-span-2 row-start-7 row-span-1 bg-[#221F26]"></div>
-              <div className="col-start-10 col-span-2 row-start-7 row-span-1 bg-[#221F26]"></div>
-              
-              {/* Smile */}
-              <div className="col-start-7 col-span-4 row-start-9 row-span-1 bg-[#221F26]"></div>
-              <div className="col-start-6 col-span-1 row-start-8 row-span-1 bg-[#221F26]"></div>
-              <div className="col-start-11 col-span-1 row-start-8 row-span-1 bg-[#221F26]"></div>
-              
-              {/* Glasses */}
-              <div className="col-start-5 col-span-3 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
-              <div className="col-start-9 col-span-3 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
-              <div className="col-start-8 col-span-1 row-start-7 row-span-1 bg-[#8B5CF6] opacity-70"></div>
-              
-              {/* Shirt */}
-              <div className="col-start-4 col-span-10 row-start-11 row-span-4 bg-[#8B5CF6]"></div>
-            </div>
           </div>
         </section>
 
