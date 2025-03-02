@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -27,14 +26,11 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
   const [clickTimer, setClickTimer] = useState<number | null>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
   
-  // For mobile detection
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
-  // Emoji mapping for button hold states
   const projectEmojis = ['🚀', '💻', '🔧', '🎨', '📱', '🤖', '🔍', '🎮'];
   const randomEmoji = projectEmojis[Math.floor(Math.random() * projectEmojis.length)];
 
-  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft' && currentPage > 1) {
@@ -52,14 +48,12 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [currentPage, totalPages, onPageChange]);
 
-  // Update URL hash
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.location.hash = `page=${currentPage}`;
     }
   }, [currentPage]);
 
-  // Handle URL hash on load
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
@@ -73,7 +67,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
     }
   }, []);
 
-  // Play pop sound
   const playPopSound = () => {
     if (audio) {
       try {
@@ -86,7 +79,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
     }
   };
 
-  // Terminal style easter egg - triple click on indicator
   const handleIndicatorClick = () => {
     setClickCount(prev => prev + 1);
     
@@ -98,7 +90,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
       if (clickCount >= 2) { // This will be the third click
         setIsTerminalStyle(prev => !prev);
         
-        // Show confetti if reaching the last page
         if (currentPage === totalPages && !isTerminalStyle) {
           showConfetti();
         }
@@ -109,7 +100,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
     setClickTimer(timerId as unknown as number);
   };
 
-  // Handle prev button click
   const handlePrevClick = () => {
     if (currentPage > 1) {
       playPopSound();
@@ -118,21 +108,18 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
     }
   };
 
-  // Handle next button click
   const handleNextClick = () => {
     if (currentPage < totalPages) {
       playPopSound();
       onPageChange(currentPage + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       
-      // Show confetti if reaching the last page
       if (currentPage === totalPages - 1) {
         showConfetti();
       }
     }
   };
 
-  // Handle button mouse down for hold effect
   const handleMouseDown = (button: 'prev' | 'next') => {
     if (button === 'prev') {
       setIsHoldingPrev(true);
@@ -141,15 +128,12 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
     }
   };
 
-  // Handle button mouse up
   const handleMouseUp = () => {
     setIsHoldingPrev(false);
     setIsHoldingNext(false);
   };
 
-  // Show confetti on last page
   const showConfetti = () => {
-    // Simple confetti effect
     if (typeof document !== 'undefined') {
       const confettiCount = 50;
       const colors = ['#FFC700', '#FF0000', '#2E3191', '#41D3BD'];
@@ -171,14 +155,12 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
         
         document.body.appendChild(confetti);
         
-        // Animate confetti
         setTimeout(() => {
           confetti.style.top = `${Math.random() * 100 + 100}vh`;
           confetti.style.left = `${Math.random() * 100}vw`;
           confetti.style.opacity = '0';
           confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
           
-          // Remove after animation
           setTimeout(() => {
             if (document.body.contains(confetti)) {
               document.body.removeChild(confetti);
@@ -196,7 +178,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
         className
       )}
     >
-      {/* Progress indicator */}
       <div 
         ref={indicatorRef}
         onClick={handleIndicatorClick}
@@ -218,9 +199,7 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
         </div>
       </div>
       
-      {/* Navigation controls */}
       <div className="flex items-center space-x-8">
-        {/* Previous button */}
         <div className="relative">
           {showStartTooltip && currentPage === 1 && (
             <div className="absolute -top-8 whitespace-nowrap text-xs bg-background/80 px-2 py-1 rounded">
@@ -260,7 +239,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
           </Button>
         </div>
         
-        {/* Next button */}
         <div className="relative">
           {showEndTooltip && currentPage === totalPages && (
             <div className="absolute -top-8 whitespace-nowrap text-xs bg-background/80 px-2 py-1 rounded">
@@ -301,7 +279,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
         </div>
       </div>
       
-      {/* Paper curl effect for page transitions */}
       <div 
         className={cn(
           "fixed bottom-0 right-0 w-24 h-24 pointer-events-none z-10 opacity-0 transition-opacity duration-300",
@@ -309,7 +286,6 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
         )}
       />
       
-      {/* No projects fallback */}
       {totalPages === 0 && (
         <div className="fixed inset-0 flex items-center justify-center flex-col">
           <div className="text-3xl mb-3 animate-float">(╯°□°)╯︵ ┻━┻</div>
