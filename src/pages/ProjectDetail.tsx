@@ -12,19 +12,25 @@ import { useToast } from '@/components/ui/use-toast';
 interface ProjectData {
   id: string;
   title: string;
+  subtitle: string;
+  emojis: { icon: string; meaning: string }[];
   overview: string;
   asciiArt: string;
   demoLink: string;
   stressLevel: number;
+  metrics: { label: string; value: string | React.ReactNode }[];
   techStack: {
     name: string;
     level: number;
     comment: string;
+    snippet?: string;
   }[];
+  problems: { issue: string; solution: string }[];
   challenges: {
     id: string;
     title: string;
     status: 'OPEN' | 'CLOSED' | 'WONTFIX' | 'PATCHED';
+    description?: string;
   }[];
 }
 
@@ -33,6 +39,12 @@ const PROJECTS: Record<string, ProjectData> = {
   'cat-treat-dispenser': {
     id: 'cat-treat-dispenser',
     title: 'Feline Snack Automaton 3000',
+    subtitle: 'Automate cat treat dispenser using Raspberry Pi + IoT with 99.9% purr-formance uptime',
+    emojis: [
+      { icon: '🐱', meaning: 'Pet-focused technology' },
+      { icon: '🤖', meaning: 'Automation solution' },
+      { icon: '🍪', meaning: 'Food dispensing capability' }
+    ],
     overview: './launch --project --purpose="Automate cat treat dispenser using Raspberry Pi + IoT"',
     asciiArt: `
      /\\___/\\     +---------------------+
@@ -62,21 +74,87 @@ const PROJECTS: Record<string, ProjectData> = {
     `,
     demoLink: 'https://meow.cafe',
     stressLevel: 3,
+    metrics: [
+      { label: 'Latency', value: '42ms' },
+      { label: 'Stars', value: '1.2k' },
+      { label: 'Coffee Cups Spent', value: (
+        <div className="flex" data-caffeine="4">
+          <span className="mr-1">☕</span>
+          <span className="mr-1">☕</span>
+          <span className="mr-1">☕</span>
+        </div>
+      )}
+    ],
     techStack: [
-      { name: 'Python', level: 4, comment: 'I speak fluent list comprehensions' },
-      { name: 'AWS', level: 2, comment: 'I can break S3 buckets' },
-      { name: 'Raspberry Pi', level: 3, comment: 'It\'s just Linux with more LEDs' },
-      { name: 'IoT Protocols', level: 3, comment: 'MQTT or it didn\'t happen' }
+      { 
+        name: 'Python', 
+        level: 4, 
+        comment: 'I speak fluent list comprehensions',
+        snippet: 'pip install raspberry-py-cat-treats' 
+      },
+      { 
+        name: 'AWS', 
+        level: 2, 
+        comment: 'I can break S3 buckets',
+        snippet: 'aws s3 cp treats.py s3://cat-storage/' 
+      },
+      { 
+        name: 'Raspberry Pi', 
+        level: 3, 
+        comment: 'It\'s just Linux with more LEDs',
+        snippet: 'sudo apt-get install cat-dependencies' 
+      },
+      { 
+        name: 'IoT Protocols', 
+        level: 3, 
+        comment: 'MQTT or it didn\'t happen',
+        snippet: 'mqtt.publish("treats/dispense", { amount: 3 })' 
+      }
+    ],
+    problems: [
+      { 
+        issue: 'Cats could not trigger treats remotely', 
+        solution: 'Implemented paw-print recognition system' 
+      },
+      { 
+        issue: 'Treat trajectory inconsistent', 
+        solution: 'Created physics-based calibration tool' 
+      },
+      { 
+        issue: 'System overheating from constant cat attention', 
+        solution: 'Added cooling system with catnip-scented exhaust' 
+      }
     ],
     challenges: [
-      { id: '42', title: 'GPIO pins hated my cat\'s paw conductivity', status: 'CLOSED' },
-      { id: '69', title: 'Treat catapult velocity calculations → fur on keyboard', status: 'WONTFIX' },
-      { id: '101', title: 'Cat learned to hack the system by meowing at 3am', status: 'OPEN' }
+      { 
+        id: '42', 
+        title: 'GPIO pins hated my cat\'s paw conductivity', 
+        status: 'CLOSED',
+        description: 'After 3am debugging sessions, discovered cats generate static electricity that interferes with sensors.' 
+      },
+      { 
+        id: '69', 
+        title: 'Treat catapult velocity calculations → fur on keyboard', 
+        status: 'WONTFIX',
+        description: 'Physics simulations kept failing because the cat insisted on sitting on my laptop during crucial calculations.' 
+      },
+      { 
+        id: '101', 
+        title: 'Cat learned to hack the system by meowing at 3am', 
+        status: 'OPEN',
+        description: 'The AI pattern detection now recognizes particular meow frequencies as authentication overrides.' 
+      }
     ]
   },
   'bad-ideas': {
     id: 'bad-ideas',
     title: 'npm install bad-ideas',
+    subtitle: 'A React hook library for questionable life choices with 0% regret prevention',
+    emojis: [
+      { icon: '🔥', meaning: 'Potentially destructive functionality' },
+      { icon: '🤔', meaning: 'Questionable design decisions' },
+      { icon: '⚠️', meaning: 'Use at your own risk' }
+    ],
     overview: 'A React hook library for questionable life choices.',
     asciiArt: `
     +---------------------+        +---------------------+
@@ -95,16 +173,78 @@ const PROJECTS: Record<string, ProjectData> = {
     `,
     demoLink: 'https://bad-ideas.dev',
     stressLevel: 4,
+    metrics: [
+      { label: 'Bundle Size', value: '420kb' },
+      { label: 'Downloads', value: '69k/month' },
+      { label: 'Coffee Cups Spent', value: (
+        <div className="flex" data-caffeine="5">
+          <span className="mr-1">☕</span>
+          <span className="mr-1">☕</span>
+          <span className="mr-1">☕</span>
+          <span className="mr-1">☕</span>
+          <span className="mr-1">☕</span>
+        </div>
+      )}
+    ],
     techStack: [
-      { name: 'JavaScript', level: 5, comment: 'I\'ve seen things' },
-      { name: 'React', level: 4, comment: 'Hooks, not crooks' },
-      { name: 'TypeScript', level: 3, comment: 'Types are just suggestions' },
-      { name: 'npm', level: 4, comment: 'node_modules weighs more than my cat' }
+      { 
+        name: 'JavaScript', 
+        level: 5, 
+        comment: 'I\'ve seen things',
+        snippet: 'npm install bad-ideas --save-dev' 
+      },
+      { 
+        name: 'React', 
+        level: 4, 
+        comment: 'Hooks, not crooks',
+        snippet: 'import { useRegret } from "bad-ideas";' 
+      },
+      { 
+        name: 'TypeScript', 
+        level: 3, 
+        comment: 'Types are just suggestions',
+        snippet: 'type BadIdea = any; // Just like my life choices' 
+      },
+      { 
+        name: 'npm', 
+        level: 4, 
+        comment: 'node_modules weighs more than my cat',
+        snippet: 'rm -rf node_modules && npm i && npm i --force' 
+      }
+    ],
+    problems: [
+      { 
+        issue: 'React hooks causing existential crises', 
+        solution: 'Added useRegret() with built-in therapy mode' 
+      },
+      { 
+        issue: 'Bundle size exceeding reasonable limits', 
+        solution: 'Implemented quantum compression (files exist in superposition)' 
+      },
+      { 
+        issue: 'Documentation too helpful and clear', 
+        solution: 'Added random Star Trek references and cryptic emoji codes' 
+      }
     ],
     challenges: [
-      { id: '1', title: 'Context API overuse caused existential crises', status: 'PATCHED' },
-      { id: '2', title: 'TypeScript types argued with my life choices', status: 'WONTFIX' },
-      { id: '3', title: 'Dependency hell opened an actual portal to hell', status: 'OPEN' }
+      { 
+        id: '1', 
+        title: 'Context API overuse caused existential crises', 
+        status: 'PATCHED',
+        description: 'Developers began questioning their life choices when nesting more than 15 context providers.'
+      },
+      { 
+        id: '2', 
+        title: 'TypeScript types argued with my life choices', 
+        status: 'WONTFIX',
+        description: 'The type system developed sentience and began rejecting code based on aesthetic preferences.' 
+      },
+      { 
+        id: '3', 
+        title: 'Dependency hell opened an actual portal to hell', 
+        status: 'OPEN',
+        description: 'npm audit now requires holy water and incantations to complete successfully.' 
+      }
     ]
   }
 };
@@ -114,6 +254,8 @@ const ProjectDetail: React.FC = () => {
   const [project, setProject] = useState<ProjectData | null>(null);
   const [retro, setRetro] = useState(false);
   const [catTaxVisible, setCatTaxVisible] = useState(false);
+  const [expandedChallenges, setExpandedChallenges] = useState<Record<string, boolean>>({});
+  const [copiedSnippet, setCopiedSnippet] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -121,6 +263,13 @@ const ProjectDetail: React.FC = () => {
     // Simulating a data fetch
     if (id && PROJECTS[id]) {
       setProject(PROJECTS[id]);
+      
+      // Initialize expanded state for challenges
+      const initialExpandedState: Record<string, boolean> = {};
+      PROJECTS[id].challenges.forEach(challenge => {
+        initialExpandedState[challenge.id] = false;
+      });
+      setExpandedChallenges(initialExpandedState);
     }
     
     // Listen for terminal command inputs
@@ -137,9 +286,52 @@ const ProjectDetail: React.FC = () => {
       }
     };
 
+    // Listen for key combinations
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.shiftKey && e.target instanceof HTMLElement) {
+        const element = e.target.closest('[data-caffeine]');
+        if (element) {
+          const caffeineLevel = element.getAttribute('data-caffeine');
+          toast({
+            title: "☕ Caffeine converted!",
+            description: `That's approximately ${Number(caffeineLevel) * 2.5} hours of sleep lost.`,
+          });
+        }
+      }
+    };
+
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener('click', handleKeyPress);
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('click', handleKeyPress);
+    };
   }, [id, toast]);
+
+  const toggleChallenge = (challengeId: string) => {
+    setExpandedChallenges(prev => ({
+      ...prev,
+      [challengeId]: !prev[challengeId]
+    }));
+  };
+
+  const copySnippet = (name: string, snippet: string) => {
+    navigator.clipboard.writeText(snippet);
+    setCopiedSnippet(name);
+    toast({
+      title: "📋 Copied to clipboard!",
+      description: `${name} snippet is ready to paste.`,
+    });
+    setTimeout(() => setCopiedSnippet(null), 2000);
+  };
+
+  const handleTitleDoubleClick = () => {
+    toast({
+      title: "🖼️ ASCII art revealed!",
+      description: "Behold, the architectural masterpiece!",
+    });
+  };
 
   if (!project) {
     return (
@@ -167,15 +359,50 @@ const ProjectDetail: React.FC = () => {
     >
       <CatScrollIndicator />
       
-      <div className="container max-w-[40%] mx-auto py-16" ref={contentRef}>
+      <div className="container max-w-[70%] mx-auto py-16 px-4 md:max-w-[60%] lg:max-w-[50%]" ref={contentRef}>
         <Link to="/" className="link-hover block mb-8">
           <span className="font-mono">cd ..</span>
         </Link>
         
-        <GlitchingTitle 
-          title={project.title} 
-          toggleRetro={() => setRetro(!retro)} 
-        />
+        <div onDoubleClick={handleTitleDoubleClick}>
+          <GlitchingTitle 
+            title={project.title} 
+            toggleRetro={() => setRetro(!retro)} 
+          />
+        </div>
+        
+        <p className="text-softgray text-lg md:text-xl mb-6 font-mono">
+          {project.subtitle}
+        </p>
+        
+        <div className="flex flex-wrap gap-3 mb-8">
+          {project.emojis.map((emoji, index) => (
+            <div 
+              key={index} 
+              className="relative group cursor-help"
+              aria-label={`${emoji.icon} - ${emoji.meaning}`}
+            >
+              <span className="text-2xl">{emoji.icon}</span>
+              <div className="absolute bottom-full mb-2 bg-background border border-border px-3 py-1 rounded-sm text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                {emoji.meaning}
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="my-8 p-4 bg-background/5 border border-border rounded-sm">
+          <h3 className="text-sm font-mono text-softgray mb-3">Key Metrics:</h3>
+          <div className="flex flex-wrap gap-6">
+            {project.metrics.map((metric, index) => (
+              <div key={index} className="flex flex-col">
+                <span className="text-xs font-mono text-softgray">{metric.label}</span>
+                <div className="text-lg font-mono cursor-help">
+                  {metric.value}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         
         <div className="my-8">
           <Terminal 
@@ -197,15 +424,46 @@ const ProjectDetail: React.FC = () => {
         <div className="wave-divider"></div>
         
         <div className="my-12">
+          <h3 className="section-heading" data-section="problems-solutions">Problems & Solutions</h3>
+          <div className="space-y-4 mt-6">
+            {project.problems.map((item, index) => (
+              <div key={index} className="grid grid-cols-[auto_1fr] gap-4 p-3 border-l-2 border-border hover:border-highlight transition-colors">
+                <div className="text-softgray">❗</div>
+                <div className="font-mono text-sm">{item.issue}</div>
+                <div className="text-highlight">✔️</div>
+                <div className="font-mono text-sm">{item.solution}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="wave-divider"></div>
+        
+        <div className="my-12">
           <h3 className="section-heading" data-section="tech-stack">Tech Stack</h3>
           <div className="space-y-4 mt-6">
             {project.techStack.map((tech, index) => (
-              <ProjectSkillBar 
-                key={index}
-                name={tech.name}
-                level={tech.level}
-                comment={tech.comment}
-              />
+              <div key={index} className="relative">
+                <ProjectSkillBar 
+                  name={tech.name}
+                  level={tech.level}
+                  comment={tech.comment}
+                />
+                {tech.snippet && (
+                  <div 
+                    className={`mt-2 p-2 bg-background/10 border border-border rounded-sm font-mono text-xs cursor-pointer transition-transform hover:scale-[1.01] hover:border-highlight ${
+                      copiedSnippet === tech.name ? 'border-highlight' : ''
+                    }`}
+                    onClick={() => copySnippet(tech.name, tech.snippet || '')}
+                    aria-label={`Copy ${tech.name} snippet`}
+                  >
+                    <code>{tech.snippet}</code>
+                    <span className="absolute right-2 top-2 text-xs">
+                      {copiedSnippet === tech.name ? '✓' : '📋'}
+                    </span>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
@@ -216,12 +474,23 @@ const ProjectDetail: React.FC = () => {
           <h3 className="section-heading" data-section="challenges">Challenges</h3>
           <div className="space-y-4 mt-6">
             {project.challenges.map((challenge) => (
-              <ChallengeItem 
-                key={challenge.id}
-                id={challenge.id}
-                title={challenge.title}
-                status={challenge.status}
-              />
+              <div key={challenge.id} className="space-y-2">
+                <div 
+                  onClick={() => toggleChallenge(challenge.id)}
+                  className="cursor-pointer"
+                >
+                  <ChallengeItem 
+                    id={challenge.id}
+                    title={challenge.title}
+                    status={challenge.status}
+                  />
+                </div>
+                {expandedChallenges[challenge.id] && challenge.description && (
+                  <div className="ml-5 pl-3 border-l border-border py-2 font-mono text-xs text-softgray animate-fade-in">
+                    {challenge.description}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
@@ -255,10 +524,18 @@ const ProjectDetail: React.FC = () => {
             href={project.demoLink} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="link-hover font-mono inline-flex items-center group"
+            className="link-hover font-mono inline-flex items-center group relative"
+            aria-label={`Live demo at ${new URL(project.demoLink).hostname}`}
           >
-            <span className="mr-2">🔗</span>
-            <span>Try it → {new URL(project.demoLink).hostname}</span>
+            <span className="mr-2 transition-all duration-300 group-hover:scale-0 group-hover:opacity-0">🔗</span>
+            <span className="group-hover:ml-4 transition-all duration-300">
+              Try it 
+              <span className="inline-block transition-all duration-300 group-hover:translate-x-1">→</span> 
+              {new URL(project.demoLink).hostname}
+            </span>
+            <span className="absolute left-0 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+              🎬
+            </span>
             <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
               (⚠️ Bring coffee)
             </span>
