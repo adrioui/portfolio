@@ -98,14 +98,61 @@ export type Profile = {
 }
 
 export type Database = {
-  projects: Project[];
-  project_emojis: ProjectEmoji[];
-  project_metrics: ProjectMetric[];
-  project_tech_stack: ProjectTechStack[];
-  project_problems: ProjectProblem[];
-  project_challenges: ProjectChallenge[];
-  skills: Skill[];
-  blog_posts: BlogPost[];
-  contact_messages: ContactMessage[];
-  profiles: Profile[];
-}
+  public: {
+    Tables: {
+      projects: {
+        Row: Project;
+        Insert: Omit<Project, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<Project, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      project_emojis: {
+        Row: ProjectEmoji;
+        Insert: Omit<ProjectEmoji, 'id'>;
+        Update: Partial<Omit<ProjectEmoji, 'id'>>;
+      };
+      project_metrics: {
+        Row: ProjectMetric;
+        Insert: Omit<ProjectMetric, 'id'>;
+        Update: Partial<Omit<ProjectMetric, 'id'>>;
+      };
+      project_tech_stack: {
+        Row: ProjectTechStack;
+        Insert: Omit<ProjectTechStack, 'id'>;
+        Update: Partial<Omit<ProjectTechStack, 'id'>>;
+      };
+      project_problems: {
+        Row: ProjectProblem;
+        Insert: Omit<ProjectProblem, 'id'>;
+        Update: Partial<Omit<ProjectProblem, 'id'>>;
+      };
+      project_challenges: {
+        Row: ProjectChallenge;
+        Insert: Omit<ProjectChallenge, 'id'>;
+        Update: Partial<Omit<ProjectChallenge, 'id'>>;
+      };
+      skills: {
+        Row: Skill;
+        Insert: Omit<Skill, 'id'>;
+        Update: Partial<Omit<Skill, 'id'>>;
+      };
+      blog_posts: {
+        Row: BlogPost;
+        Insert: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      contact_messages: {
+        Row: ContactMessage;
+        Insert: Omit<ContactMessage, 'id' | 'created_at' | 'read'>;
+        Update: Partial<Omit<ContactMessage, 'id' | 'created_at'>>;
+      };
+      profiles: {
+        Row: Profile;
+        Insert: Omit<Profile, 'id'>;
+        Update: Partial<Omit<Profile, 'id'>>;
+      };
+    };
+    Views: {};
+    Functions: {};
+    Enums: {};
+  };
+};
