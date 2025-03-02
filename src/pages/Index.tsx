@@ -7,6 +7,58 @@ import SkillBar from '@/components/SkillBar';
 import { initAnimations } from '@/utils/animations';
 import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
 
+// Define project data for easier management
+const projects = [
+  {
+    id: "pixel-perfect",
+    title: "Pixel Perfect",
+    emojis: ['🖼️', '⚡', '🪄'],
+    description: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
+    catReview: "Paw-approved API design",
+    stressLevel: 4
+  },
+  {
+    id: "terminal-tunes",
+    title: "Terminal Tunes",
+    emojis: ['🎵', '💻', '🎮'],
+    description: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
+    catReview: "Makes weird noises while I'm napping",
+    stressLevel: 3
+  },
+  {
+    id: "recursive-recipes",
+    title: "Recursive Recipes",
+    emojis: ['🍳', '🔄', '🤖'],
+    description: "Recipe generator that creates increasingly absurd cooking instructions the more you use it.",
+    catReview: "Food descriptions made me hungry",
+    stressLevel: 2
+  },
+  {
+    id: "error-handler",
+    title: "Error Handler",
+    emojis: ['🐛', '🔍', '🧠'],
+    description: "Turns cryptic stack traces into sarcastic, but actually helpful explanations.",
+    catReview: "Fixed my yarn hairball issue",
+    stressLevel: 5
+  },
+  {
+    id: "quantum-comments",
+    title: "Quantum Comments",
+    emojis: ['💬', '🌌', '🧩'],
+    description: "Code documentation that changes based on who's reading it and how much coffee they've had.",
+    catReview: "Meow-nificent state management",
+    stressLevel: 4
+  },
+  {
+    id: "sarcastic-linter",
+    title: "Sarcastic Linter",
+    emojis: ['🔬', '🙄', '✂️'],
+    description: "A code linter that judges your style choices with increasingly sassy comments.",
+    catReview: "Judges my code like I judge my humans",
+    stressLevel: 3
+  }
+];
+
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   
@@ -83,41 +135,17 @@ const Index = () => {
           <h2 className="section-heading">$ projects</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ProjectCard
-              id="pixel-perfect"
-              title="Pixel Perfect"
-              emojis={['🖼️', '⚡', '🪄']}
-              description="A brutalist image editor that uses machine learning to predict what you're trying to draw."
-              catReview="Paw-approved API design"
-              stressLevel={4}
-            />
-            
-            <ProjectCard
-              id="terminal-tunes"
-              title="Terminal Tunes"
-              emojis={['🎵', '💻', '🎮']}
-              description="CLI music player that visualizes audio as ASCII art patterns in your terminal."
-              catReview="Makes weird noises while I'm napping"
-              stressLevel={3}
-            />
-            
-            <ProjectCard
-              id="recursive-recipes"
-              title="Recursive Recipes"
-              emojis={['🍳', '🔄', '🤖']}
-              description="Recipe generator that creates increasingly absurd cooking instructions the more you use it."
-              catReview="Food descriptions made me hungry"
-              stressLevel={2}
-            />
-            
-            <ProjectCard
-              id="error-handler"
-              title="Error Handler"
-              emojis={['🐛', '🔍', '🧠']}
-              description="Turns cryptic stack traces into sarcastic, but actually helpful explanations."
-              catReview="Fixed my yarn hairball issue"
-              stressLevel={5}
-            />
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                title={project.title}
+                emojis={project.emojis}
+                description={project.description}
+                catReview={project.catReview}
+                stressLevel={project.stressLevel}
+              />
+            ))}
           </div>
         </section>
 
