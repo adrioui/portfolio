@@ -1,83 +1,14 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Terminal from '@/components/Terminal';
 import ProjectCard from '@/components/ProjectCard';
 import ScrollIndicator from '@/components/ScrollIndicator';
 import SkillBar from '@/components/SkillBar';
 import { initAnimations } from '@/utils/animations';
 import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
-import { Button } from '@/components/ui/button';
-import { 
-  Pagination, 
-  PaginationContent, 
-  PaginationItem, 
-  PaginationLink, 
-  PaginationNext, 
-  PaginationPrevious 
-} from '@/components/ui/pagination';
-
-// Define project data for easier management
-const projects = [
-  {
-    id: "pixel-perfect",
-    title: "Pixel Perfect",
-    emojis: ['🖼️', '⚡', '🪄'],
-    description: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
-    catReview: "Paw-approved API design",
-    stressLevel: 4
-  },
-  {
-    id: "terminal-tunes",
-    title: "Terminal Tunes",
-    emojis: ['🎵', '💻', '🎮'],
-    description: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
-    catReview: "Makes weird noises while I'm napping",
-    stressLevel: 3
-  },
-  {
-    id: "recursive-recipes",
-    title: "Recursive Recipes",
-    emojis: ['🍳', '🔄', '🤖'],
-    description: "Recipe generator that creates increasingly absurd cooking instructions the more you use it.",
-    catReview: "Food descriptions made me hungry",
-    stressLevel: 2
-  },
-  {
-    id: "error-handler",
-    title: "Error Handler",
-    emojis: ['🐛', '🔍', '🧠'],
-    description: "Turns cryptic stack traces into sarcastic, but actually helpful explanations.",
-    catReview: "Fixed my yarn hairball issue",
-    stressLevel: 5
-  },
-  {
-    id: "quantum-comments",
-    title: "Quantum Comments",
-    emojis: ['💬', '🌌', '🧩'],
-    description: "Code documentation that changes based on who's reading it and how much coffee they've had.",
-    catReview: "Meow-nificent state management",
-    stressLevel: 4
-  },
-  {
-    id: "sarcastic-linter",
-    title: "Sarcastic Linter",
-    emojis: ['🔬', '🙄', '✂️'],
-    description: "A code linter that judges your style choices with increasingly sassy comments.",
-    catReview: "Judges my code like I judge my humans",
-    stressLevel: 3
-  }
-];
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 4;
-  
-  // Calculate pagination values
-  const totalPages = Math.ceil(projects.length / projectsPerPage);
-  const indexOfLastProject = currentPage * projectsPerPage;
-  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
   
   useEffect(() => {
     // Initialize animations and easter eggs after component mounts
@@ -98,10 +29,6 @@ const Index = () => {
 
   const handleNameClick = () => {
     triggerNameAnimation();
-  };
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
   };
 
   return (
@@ -156,57 +83,42 @@ const Index = () => {
           <h2 className="section-heading">$ projects</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {currentProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                emojis={project.emojis}
-                description={project.description}
-                catReview={project.catReview}
-                stressLevel={project.stressLevel}
-              />
-            ))}
+            <ProjectCard
+              id="pixel-perfect"
+              title="Pixel Perfect"
+              emojis={['🖼️', '⚡', '🪄']}
+              description="A brutalist image editor that uses machine learning to predict what you're trying to draw."
+              catReview="Paw-approved API design"
+              stressLevel={4}
+            />
+            
+            <ProjectCard
+              id="terminal-tunes"
+              title="Terminal Tunes"
+              emojis={['🎵', '💻', '🎮']}
+              description="CLI music player that visualizes audio as ASCII art patterns in your terminal."
+              catReview="Makes weird noises while I'm napping"
+              stressLevel={3}
+            />
+            
+            <ProjectCard
+              id="recursive-recipes"
+              title="Recursive Recipes"
+              emojis={['🍳', '🔄', '🤖']}
+              description="Recipe generator that creates increasingly absurd cooking instructions the more you use it."
+              catReview="Food descriptions made me hungry"
+              stressLevel={2}
+            />
+            
+            <ProjectCard
+              id="error-handler"
+              title="Error Handler"
+              emojis={['🐛', '🔍', '🧠']}
+              description="Turns cryptic stack traces into sarcastic, but actually helpful explanations."
+              catReview="Fixed my yarn hairball issue"
+              stressLevel={5}
+            />
           </div>
-          
-          {/* Pagination Controls */}
-          {totalPages > 1 && (
-            <div className="mt-10">
-              <Pagination>
-                <PaginationContent>
-                  {currentPage > 1 && (
-                    <PaginationItem>
-                      <PaginationPrevious 
-                        onClick={() => handlePageChange(currentPage - 1)} 
-                        className="cursor-pointer" 
-                      />
-                    </PaginationItem>
-                  )}
-                  
-                  {[...Array(totalPages)].map((_, index) => (
-                    <PaginationItem key={index}>
-                      <PaginationLink
-                        onClick={() => handlePageChange(index + 1)}
-                        isActive={currentPage === index + 1}
-                        className="cursor-pointer"
-                      >
-                        {index + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  
-                  {currentPage < totalPages && (
-                    <PaginationItem>
-                      <PaginationNext 
-                        onClick={() => handlePageChange(currentPage + 1)} 
-                        className="cursor-pointer"
-                      />
-                    </PaginationItem>
-                  )}
-                </PaginationContent>
-              </Pagination>
-            </div>
-          )}
         </section>
 
         <div className="wave-divider"></div>
