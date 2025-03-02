@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import Terminal from '@/components/Terminal';
 import ProjectCard from '@/components/ProjectCard';
@@ -11,23 +10,23 @@ import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   
-  // Projects data array
+  // Projects data array - updated to match the project detail page
   const projects = [
     {
-      id: "pixel-perfect",
-      title: "Pixel Perfect",
-      emojis: ['🖼️', '⚡', '🪄'],
-      description: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
-      catReview: "Paw-approved API design",
-      stressLevel: 4,
+      id: "cat-treat-dispenser",
+      title: "Feline Snack Automaton 3000",
+      emojis: ['🐱', '🍪', '🤖'],
+      description: "Automate cat treat dispenser using Raspberry Pi + IoT.",
+      catReview: "Finally, treats on demand!",
+      stressLevel: 3,
     },
     {
-      id: "terminal-tunes",
-      title: "Terminal Tunes",
-      emojis: ['🎵', '💻', '🎮'],
-      description: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
-      catReview: "Makes weird noises while I'm napping",
-      stressLevel: 3,
+      id: "bad-ideas",
+      title: "npm install bad-ideas",
+      emojis: ['🐛', '🧠', '😵'],
+      description: "A React hook library for questionable life choices.",
+      catReview: "Somehow breaks even when it works",
+      stressLevel: 4,
     },
     {
       id: "recursive-recipes",
