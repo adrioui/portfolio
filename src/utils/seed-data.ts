@@ -5,98 +5,101 @@ import { toast } from 'sonner';
 // Sample project data for seeding the database
 const sampleProjects = [
   {
-    title: "Personal Portfolio",
-    subtitle: "A showcase of my web development skills",
-    description: "A responsive portfolio website built with React and Tailwind CSS",
-    overview: "This project showcases my frontend development skills and highlights various projects I've worked on. It features a clean, modern design with smooth animations and responsive layouts.",
-    ascii_art: "  _____ \n |     | \n |_____| \n |     | \n |_____| \n",
-    demo_link: "https://example.com/portfolio",
-    stress_level: 2,
+    id: 'bad-ideas-01',
+    title: "Bad Ideas",
+    subtitle: "A collection of terrible project ideas",
+    description: "A showcase of project ideas that should never be implemented",
+    overview: "This is a humorous collection of the worst project ideas I've ever had. Each idea comes with an explanation of why it would be terrible to actually build.",
+    ascii_art: "  _____  \n |_   _| \n   | |   \n   | |   \n  _| |_  \n |_____| \n",
+    demo_link: "https://example.com/bad-ideas",
+    stress_level: 5,
     user_id: "system", // This will be replaced with the actual user_id when auth is implemented
     project_emojis: [
-      { icon: "⚛️", meaning: "React" },
-      { icon: "🎨", meaning: "CSS" },
-      { icon: "📱", meaning: "Responsive" }
+      { icon: "💩", meaning: "Bad Ideas" },
+      { icon: "🙈", meaning: "Don't Look" },
+      { icon: "🔥", meaning: "Dumpster Fire" }
     ],
     project_metrics: [
-      { label: "Development Time", value: "2 weeks", is_component: false },
-      { label: "Code Quality", value: "High", is_component: false }
+      { label: "Comedy Value", value: "High", is_component: false },
+      { label: "Development Time", value: "Never", is_component: false }
     ],
     project_tech_stack: [
-      { name: "React", level: 4, comment: "Used for component-based UI", snippet: "const App = () => <div>Hello World</div>;" },
-      { name: "Tailwind CSS", level: 3, comment: "Used for styling", snippet: null }
+      { name: "Satire", level: 5, comment: "Heavily reliant on sarcasm and irony", snippet: null },
+      { name: "Comedy Writing", level: 4, comment: "Used to create humorous descriptions", snippet: 'console.log("Why did the programmer quit his job? He didn\'t get arrays!");' }
     ],
     project_problems: [
-      { issue: "Mobile responsiveness", solution: "Used media queries and flex layouts" },
-      { issue: "Performance", solution: "Implemented code splitting and lazy loading" }
+      { issue: "Too many terrible ideas", solution: "Created a ranking system for badness" },
+      { issue: "People trying to implement the ideas", solution: "Added very clear warnings" }
     ],
     project_challenges: [
-      { title: "Dark mode implementation", status: "CLOSED", description: "Implemented using CSS variables and context API" },
-      { title: "Animation performance", status: "OPEN", description: "Some animations are causing performance issues on mobile" }
+      { title: "Ideas too believable", status: "CLOSED", description: "Made ideas more obviously terrible" },
+      { title: "Too many venture capitalists interested", status: "OPEN", description: "Need to add more disclaimers" }
     ]
   },
   {
-    title: "E-commerce Platform",
-    subtitle: "A full-stack online shopping experience",
-    description: "A modern e-commerce website with cart functionality and payment integration",
-    overview: "This project is a full-featured e-commerce platform that allows users to browse products, add them to a cart, and complete purchases. It includes user authentication, product management, and order tracking.",
-    ascii_art: "  _____  \n |_   _| \n   | |   \n   | |   \n  _|_|_  \n |_____| \n",
-    demo_link: "https://example.com/ecommerce",
-    stress_level: 4,
+    id: 'cat-web-03',
+    title: "CatWeb",
+    subtitle: "A website for cats, by cats",
+    description: "A social network exclusively for feline users",
+    overview: "CatWeb is a parody project exploring what a social network designed exclusively for cats might look like. It features paw-friendly navigation, purr-based authentication, and content organized around napping spots and treat locations.",
+    ascii_art: "  /\\_/\\ \n ( o.o ) \n  > ^ < \n",
+    demo_link: "https://example.com/catweb",
+    stress_level: 1,
     user_id: "system",
     project_emojis: [
-      { icon: "🛒", meaning: "Shopping" },
-      { icon: "💳", meaning: "Payments" },
-      { icon: "🔒", meaning: "Security" }
+      { icon: "🐱", meaning: "Cats" },
+      { icon: "🧶", meaning: "Yarn" },
+      { icon: "🐟", meaning: "Fish" }
     ],
     project_metrics: [
-      { label: "Development Time", value: "3 months", is_component: false },
-      { label: "Team Size", value: "3 developers", is_component: false }
+      { label: "Purrs Generated", value: "9832", is_component: false },
+      { label: "Yarn Balls Used", value: "583", is_component: false }
     ],
     project_tech_stack: [
-      { name: "Next.js", level: 5, comment: "Used for SSR and routing", snippet: "export async function getServerSideProps() { /* ... */ }" },
-      { name: "Stripe", level: 3, comment: "Used for payment processing", snippet: null },
-      { name: "MongoDB", level: 4, comment: "Used for database", snippet: null }
+      { name: "React", level: 4, comment: "Used for component-based UI", snippet: "const CatApp = () => <div>Meow World</div>;" },
+      { name: "Tailwind CSS", level: 3, comment: "Used for styling", snippet: null },
+      { name: "Node.js", level: 4, comment: "Backend services", snippet: null }
     ],
     project_problems: [
-      { issue: "Cart synchronization", solution: "Implemented Redux with local storage" },
-      { issue: "Payment security", solution: "Used Stripe Elements and followed best practices" }
+      { issue: "Cats can't type", solution: "Developed paw-friendly interface" },
+      { issue: "Content moderation", solution: "Implemented anti-laser pointer detection" }
     ],
     project_challenges: [
-      { title: "Inventory management", status: "CLOSED", description: "Implemented real-time inventory tracking" },
-      { title: "International shipping", status: "WONTFIX", description: "Decided to focus on domestic market first" }
+      { title: "Keeping cats interested", status: "CLOSED", description: "Added random movement animations" },
+      { title: "Dog infiltration attempts", status: "WONTFIX", description: "Decided to be inclusive after all" }
     ]
   },
   {
-    title: "Weather Dashboard",
-    subtitle: "Real-time weather information",
-    description: "A weather application that provides current and forecast data",
-    overview: "This dashboard displays weather information from multiple sources, allowing users to view current conditions, forecasts, and historical data. It features interactive maps and data visualizations.",
-    ascii_art: "    _    \n   | |   \n __|_|__ \n|_     _|\n  |___|  \n",
-    demo_link: "https://example.com/weather",
+    id: 'code-dreams-02',
+    title: "Code Dreams",
+    subtitle: "What if your code could dream?",
+    description: "An AI experiment that generates visual representations of code",
+    overview: "This art project uses machine learning to analyze codebases and generate dreamlike visualizations representing the structure and patterns found in the code. It explores the intersection of programming and creativity.",
+    ascii_art: "  _____  \n |     | \n |_____| \n |     | \n |_____| \n",
+    demo_link: "https://example.com/code-dreams",
     stress_level: 3,
     user_id: "system",
     project_emojis: [
-      { icon: "🌤️", meaning: "Weather" },
-      { icon: "📊", meaning: "Data" },
-      { icon: "🗺️", meaning: "Maps" }
+      { icon: "✨", meaning: "Magic" },
+      { icon: "🧠", meaning: "Neural Networks" },
+      { icon: "🎨", meaning: "Art" }
     ],
     project_metrics: [
-      { label: "Development Time", value: "1 month", is_component: false },
-      { label: "API Calls", value: "~5000/day", is_component: false }
+      { label: "Computation Time", value: "72 hours", is_component: false },
+      { label: "Dataset Size", value: "250GB", is_component: false }
     ],
     project_tech_stack: [
-      { name: "Vue.js", level: 4, comment: "Used for reactive UI", snippet: null },
-      { name: "D3.js", level: 3, comment: "Used for data visualization", snippet: null },
-      { name: "OpenWeatherMap API", level: 4, comment: "Used for weather data", snippet: null }
+      { name: "TensorFlow", level: 5, comment: "Core ML framework", snippet: "model.fit(x_train, y_train, epochs=50)" },
+      { name: "WebGL", level: 3, comment: "Rendering visualizations", snippet: null },
+      { name: "Python", level: 4, comment: "Data processing", snippet: null }
     ],
     project_problems: [
-      { issue: "API rate limiting", solution: "Implemented caching and request throttling" },
-      { issue: "Data accuracy", solution: "Combined multiple weather APIs for verification" }
+      { issue: "GPU performance", solution: "Optimized shaders and reduced complexity" },
+      { issue: "Memory usage", solution: "Implemented progressive loading and streaming" }
     ],
     project_challenges: [
-      { title: "Location detection", status: "CLOSED", description: "Used browser geolocation API with fallbacks" },
-      { title: "Offline support", status: "PATCHED", description: "Implemented service workers for basic offline functionality" }
+      { title: "Visualization clarity", status: "CLOSED", description: "Improved the color mapping algorithm" },
+      { title: "Handling large codebases", status: "PATCHED", description: "Added sampling technique to process only representative code sections" }
     ]
   }
 ];
@@ -113,6 +116,7 @@ export async function seedProjects() {
       const { data: projectData, error: projectError } = await supabase
         .from('projects')
         .insert({
+          id: project.id, // Use the predefined ID
           title: project.title,
           subtitle: project.subtitle,
           description: project.description,
