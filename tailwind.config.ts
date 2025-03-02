@@ -118,6 +118,27 @@ export default {
 				'typing': {
 					'from': { width: '0' },
 					'to': { width: '100%' }
+				},
+				'paper-tear': {
+					'0%': { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+					'100%': { clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }
+				},
+				'cassette-loading': {
+					'0%': { width: '0%' },
+					'100%': { width: '100%' }
+				},
+				'noise': {
+					'0%': { transform: 'translateX(0)' },
+					'10%': { transform: 'translateX(-5%)' },
+					'20%': { transform: 'translateX(0)' },
+					'30%': { transform: 'translateX(5%)' },
+					'40%': { transform: 'translateX(-5%)' },
+					'50%': { transform: 'translateX(5%)' },
+					'60%': { transform: 'translateX(0)' },
+					'70%': { transform: 'translateX(-5%)' },
+					'80%': { transform: 'translateX(0)' },
+					'90%': { transform: 'translateX(5%)' },
+					'100%': { transform: 'translateX(0)' }
 				}
 			},
 			animation: {
@@ -132,8 +153,14 @@ export default {
 				'matrix-fall': 'matrix-fall 10s linear infinite',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
-				'typing': 'typing 3.5s steps(40, end)'
+				'typing': 'typing 3.5s steps(40, end)',
+				'paper-tear': 'paper-tear 0.5s ease-in-out forwards',
+				'cassette-loading': 'cassette-loading 1s ease-in-out',
+				'noise': 'noise 0.3s steps(3) infinite'
 			},
+			boxShadow: {
+				'glow': '0 0 8px var(--highlight)'
+			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

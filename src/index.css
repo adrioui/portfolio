@@ -146,6 +146,45 @@
     animation: blink 0.75s step-end infinite, moveRight 2s steps(30, end) forwards;
   }
   
+  /* Pagination styles */
+  .shadow-glow {
+    filter: drop-shadow(0 0 8px hsl(var(--highlight)));
+  }
+  
+  .page-transition {
+    transition: clip-path 0.5s;
+  }
+  
+  .page-exit {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .page-exit-active {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  
+  .page-enter {
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+  }
+  
+  .page-enter-active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  /* VHS static effect for rewind mode */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+  
+  @keyframes noise {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .animate-noise {
+    animation: noise 0.2s steps(5) infinite;
+  }
+  
   @keyframes type {
     to { width: 100%; }
   }
@@ -159,4 +198,3 @@
   from, to { opacity: 1; }
   50% { opacity: 0; }
 }
-

@@ -1,14 +1,101 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Terminal from '@/components/Terminal';
 import ProjectCard from '@/components/ProjectCard';
 import ScrollIndicator from '@/components/ScrollIndicator';
 import SkillBar from '@/components/SkillBar';
+import QuirkyPagination from '@/components/QuirkyPagination';
 import { initAnimations } from '@/utils/animations';
 import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
+  
+  // Projects data array
+  const projects = [
+    {
+      id: "pixel-perfect",
+      title: "Pixel Perfect",
+      emojis: ['🖼️', '⚡', '🪄'],
+      description: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
+      catReview: "Paw-approved API design",
+      stressLevel: 4,
+    },
+    {
+      id: "terminal-tunes",
+      title: "Terminal Tunes",
+      emojis: ['🎵', '💻', '🎮'],
+      description: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
+      catReview: "Makes weird noises while I'm napping",
+      stressLevel: 3,
+    },
+    {
+      id: "recursive-recipes",
+      title: "Recursive Recipes",
+      emojis: ['🍳', '🔄', '🤖'],
+      description: "Recipe generator that creates increasingly absurd cooking instructions the more you use it.",
+      catReview: "Food descriptions made me hungry",
+      stressLevel: 2,
+    },
+    {
+      id: "error-handler",
+      title: "Error Handler",
+      emojis: ['🐛', '🔍', '🧠'],
+      description: "Turns cryptic stack traces into sarcastic, but actually helpful explanations.",
+      catReview: "Fixed my yarn hairball issue",
+      stressLevel: 5,
+    },
+    {
+      id: "quantum-calculator",
+      title: "Quantum Calculator",
+      emojis: ['🧮', '🔮', '🌌'],
+      description: "A calculator that gives you results from parallel universes when you divide by zero.",
+      catReview: "Showed me 9 lives at once",
+      stressLevel: 5,
+    },
+    {
+      id: "procrastination-engine",
+      title: "Procrastination Engine",
+      emojis: ['⏰', '😴', '🚀'],
+      description: "Task management app that generates increasingly convincing excuses the closer you get to deadlines.",
+      catReview: "Finally understands my lifestyle",
+      stressLevel: 3,
+    },
+  ];
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isRewinding, setIsRewinding] = useState(false);
+  const projectsPerPage = 4;
+  
+  // Calculate total pages
+  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  
+  // Get current projects with rewind mode support
+  const getCurrentProjects = () => {
+    const indexOfLastProject = currentPage * projectsPerPage;
+    const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+    
+    // Display projects in reverse order if in rewind mode
+    const sortedProjects = isRewinding 
+      ? [...projects].reverse() 
+      : projects;
+      
+    return sortedProjects.slice(indexOfFirstProject, indexOfLastProject);
+  };
+  
+  // Get current visible projects
+  const currentProjects = getCurrentProjects();
+  
+  // Handle page changes from the pagination component
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Scroll to projects section
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   
   useEffect(() => {
     // Initialize animations and easter eggs after component mounts
@@ -83,42 +170,28 @@ const Index = () => {
           <h2 className="section-heading">$ projects</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ProjectCard
-              id="pixel-perfect"
-              title="Pixel Perfect"
-              emojis={['🖼️', '⚡', '🪄']}
-              description="A brutalist image editor that uses machine learning to predict what you're trying to draw."
-              catReview="Paw-approved API design"
-              stressLevel={4}
-            />
-            
-            <ProjectCard
-              id="terminal-tunes"
-              title="Terminal Tunes"
-              emojis={['🎵', '💻', '🎮']}
-              description="CLI music player that visualizes audio as ASCII art patterns in your terminal."
-              catReview="Makes weird noises while I'm napping"
-              stressLevel={3}
-            />
-            
-            <ProjectCard
-              id="recursive-recipes"
-              title="Recursive Recipes"
-              emojis={['🍳', '🔄', '🤖']}
-              description="Recipe generator that creates increasingly absurd cooking instructions the more you use it."
-              catReview="Food descriptions made me hungry"
-              stressLevel={2}
-            />
-            
-            <ProjectCard
-              id="error-handler"
-              title="Error Handler"
-              emojis={['🐛', '🔍', '🧠']}
-              description="Turns cryptic stack traces into sarcastic, but actually helpful explanations."
-              catReview="Fixed my yarn hairball issue"
-              stressLevel={5}
-            />
+            {currentProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                title={project.title}
+                emojis={project.emojis}
+                description={project.description}
+                catReview={project.catReview}
+                stressLevel={project.stressLevel}
+              />
+            ))}
           </div>
+          
+          {/* Only show pagination if we have more than one page */}
+          {totalPages > 1 && (
+            <QuirkyPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              className="mt-12"
+            />
+          )}
         </section>
 
         <div className="wave-divider"></div>
