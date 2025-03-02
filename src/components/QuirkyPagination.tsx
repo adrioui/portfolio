@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -224,7 +225,7 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             onMouseEnter={() => currentPage === 1 && setShowStartTooltip(true)}
-            onMouseLeave={() => setShowStartTooltip(false)}
+            onMouseOut={() => setShowStartTooltip(false)}
           >
             {isHoldingPrev ? (
               <span className="animate-wiggle">{randomEmoji}</span>
@@ -263,7 +264,7 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             onMouseEnter={() => currentPage === totalPages && setShowEndTooltip(true)}
-            onMouseLeave={() => setShowEndTooltip(false)}
+            onMouseOut={() => setShowEndTooltip(false)}
           >
             {isHoldingNext ? (
               <span className="animate-wiggle">{randomEmoji}</span>
