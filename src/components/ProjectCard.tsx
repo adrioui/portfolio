@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import type { Project, ProjectEmoji } from '@/types/database.types';
 
 interface ProjectCardProps {
   title: string;
-  emojis: string[];
+  emojis: string[] | ProjectEmoji[];
   description: string;
   catReview: string;
   stressLevel: number; // 1-5
@@ -25,6 +26,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const stressEmojis = Array(5).fill('☁️').map((emoji, index) => index < stressLevel ? '🔥' : emoji);
 
+  // Convert emojis to string format if they're ProjectEmoji objects
+  const emojiIcons = emojis.map((emoji) => {
+    if (typeof emoji === 'string') {
+      return emoji;
+    }
+    return (emoji as ProjectEmoji).icon;
+  });
+
   return (
     <Link 
       to={`/project/${id}`}
@@ -35,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="flex justify-between items-center mb-3">
         <h3 className="font-mono text-lg font-medium">{title}</h3>
         <div className="flex space-x-1">
-          {emojis.map((emoji, index) => (
+          {emojiIcons.map((emoji, index) => (
             <span key={index} className="transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
               {emoji}
             </span>

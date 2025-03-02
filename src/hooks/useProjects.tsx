@@ -1,31 +1,42 @@
 
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getProjects } from '@/utils/db-helpers';
+import { seedProjects, hasProjects } from '@/utils/seed-data';
 import { toast } from 'sonner';
-import { checkIfProjectsExist } from '@/utils/seed-data';
 import { useState, useEffect } from 'react';
 
 export function useProjects() {
-  const [hasProjects, setHasProjects] = useState<boolean | null>(null);
-  const queryClient = useQueryClient();
+  const [isSeeding, setIsSeeding] = useState(false);
+  const [needsSeed, setNeedsSeed] = useState<boolean | null>(null);
 
-  // Check if projects exist
+  // Check if we need to seed the database
   useEffect(() => {
-    const checkProjects = async () => {
-      const exists = await checkIfProjectsExist();
-      setHasProjects(exists);
+    const checkForProjects = async () => {
+      const projectsExist = await hasProjects();
+      setNeedsSeed(!projectsExist);
     };
     
-    checkProjects();
+    checkForProjects();
   }, []);
 
-  // Handle project seeding success
-  const handleSeedSuccess = () => {
-    setHasProjects(true);
-    queryClient.invalidateQueries({ queryKey: ['projects'] });
+  // Function to seed the database
+  const seedProjectsData = async () => {
+    setIsSeeding(true);
+    try {
+      await seedProjects();
+      setNeedsSeed(false);
+      // Invalidate the query to refetch data
+      return true;
+    } catch (error) {
+      console.error('Error seeding projects:', error);
+      toast.error('Failed to seed projects');
+      return false;
+    } finally {
+      setIsSeeding(false);
+    }
   };
 
-  // Query for projects
+  // The main query to fetch projects
   const projectsQuery = useQuery({
     queryKey: ['projects'],
     queryFn: async () => {
@@ -38,12 +49,13 @@ export function useProjects() {
         return [];
       }
     },
-    enabled: hasProjects !== null, // Only run query when we know if projects exist
+    enabled: !isSeeding, // Don't run the query while seeding
   });
 
   return {
     ...projectsQuery,
-    hasProjects,
-    handleSeedSuccess,
+    isSeeding,
+    needsSeed,
+    seedProjects: seedProjectsData
   };
 }

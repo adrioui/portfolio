@@ -1,51 +1,30 @@
-import './App.css'
-import {
-  ClerkAuthProvider,
-  ClerkLoaded,
-  ClerkLoading,
-  SignedIn,
-  SignedOut,
-  useClerk,
-} from ' @clerk/clerk-react'
-import { Auth } from '@/pages/Auth'
-import Index from '@/pages/Index'
-import Profile from '@/pages/Profile'
-import ProjectDetail from '@/pages/ProjectDetail'
-import NotFound from '@/pages/NotFound'
-import Header from '@/components/Header'
-import { Toaster } from 'sonner'
-import ProtectedRoute from '@/components/ProtectedRoute'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import Projects from '@/pages/Projects';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import ProjectDetail from "./pages/ProjectDetail";
+import ProjectsList from './pages/ProjectsList';
 
-// Define a default fallback function for `ClerkAuthProvider`.
-const clerkAuthProp = {
-  publishableKey: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
-  navigate: () => {},
-};
+const queryClient = new QueryClient();
 
-function App() {
-  return (
-    <BrowserRouter>
-      <main className="app">
-        <Header />
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/sign-in/*" element={<Auth type="sign-in" />} />
-          <Route path="/sign-up/*" element={<Auth type="sign-up" />} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects" element={<ProjectsList />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </main>
-      <Toaster />
-    </BrowserRouter>
-  );
-}
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
