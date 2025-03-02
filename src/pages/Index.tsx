@@ -38,6 +38,14 @@ const Index = () => {
       stressLevel: 2,
     },
     {
+      id: "cat-treat-dispenser",
+      title: "Cat Treat Dispenser",
+      emojis: ['😺', '🍪', '🤖'],
+      description: "IoT device that uses AI to recognize when your cat is being good and dispenses treats accordingly.",
+      catReview: "Finally, the recognition I deserve",
+      stressLevel: 4,
+    },
+    {
       id: "error-handler",
       title: "Error Handler",
       emojis: ['🐛', '🔍', '🧠'],
