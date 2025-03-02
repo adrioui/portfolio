@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Terminal from '@/components/Terminal';
@@ -458,7 +457,7 @@ const ProjectDetail: React.FC = () => {
                     aria-label={`Copy ${tech.name} snippet`}
                   >
                     <code>{tech.snippet}</code>
-                    <span className="absolute right-2 top-2 text-xs">
+                    <span className="absolute right-2 top-2 text-xs opacity-70 hover:opacity-100 transition-opacity">
                       {copiedSnippet === tech.name ? '✓' : '📋'}
                     </span>
                   </div>
