@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import Terminal from '@/components/Terminal';
 import ProjectCard from '@/components/ProjectCard';
@@ -11,55 +10,117 @@ import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   
-  // Projects data array
+  // Enhanced projects data array
   const projects = [
     {
       id: "pixel-perfect",
       title: "Pixel Perfect",
-      emojis: ['🖼️', '⚡', '🪄'],
+      subtitle: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
+      emojis: [
+        { icon: '🖼️', meaning: 'Image editing' },
+        { icon: '⚡', meaning: 'Fast performance' },
+        { icon: '🪄', meaning: 'AI-powered' }
+      ],
       description: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
       catReview: "Paw-approved API design",
       stressLevel: 4,
+      techStack: [
+        { name: 'React', level: 4 },
+        { name: 'TensorFlow.js', level: 3 },
+        { name: 'WebGL', level: 5 },
+        { name: 'Rust WASM', level: 2 }
+      ]
     },
     {
       id: "terminal-tunes",
       title: "Terminal Tunes",
-      emojis: ['🎵', '💻', '🎮'],
+      subtitle: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
+      emojis: [
+        { icon: '🎵', meaning: 'Music playback' },
+        { icon: '💻', meaning: 'Terminal-based' },
+        { icon: '🎮', meaning: 'Interactive controls' }
+      ],
       description: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
       catReview: "Makes weird noises while I'm napping",
       stressLevel: 3,
+      techStack: [
+        { name: 'Node.js', level: 5 },
+        { name: 'Web Audio API', level: 4 },
+        { name: 'Chalk', level: 3 }
+      ]
     },
     {
       id: "recursive-recipes",
       title: "Recursive Recipes",
-      emojis: ['🍳', '🔄', '🤖'],
+      subtitle: "Recipe generator that creates increasingly absurd cooking instructions the more you use it.",
+      emojis: [
+        { icon: '🍳', meaning: 'Cooking related' },
+        { icon: '🔄', meaning: 'Recursive generation' },
+        { icon: '🤖', meaning: 'AI-powered' }
+      ],
       description: "Recipe generator that creates increasingly absurd cooking instructions the more you use it.",
       catReview: "Food descriptions made me hungry",
       stressLevel: 2,
+      techStack: [
+        { name: 'GPT-3', level: 4 },
+        { name: 'Next.js', level: 3 },
+        { name: 'SQLite', level: 2 }
+      ]
     },
     {
       id: "error-handler",
       title: "Error Handler",
-      emojis: ['🐛', '🔍', '🧠'],
+      subtitle: "Turns cryptic stack traces into sarcastic, but actually helpful explanations.",
+      emojis: [
+        { icon: '🐛', meaning: 'Debugging tool' },
+        { icon: '🔍', meaning: 'Error investigation' },
+        { icon: '🧠', meaning: 'AI analysis' }
+      ],
       description: "Turns cryptic stack traces into sarcastic, but actually helpful explanations.",
       catReview: "Fixed my yarn hairball issue",
       stressLevel: 5,
+      techStack: [
+        { name: 'TypeScript', level: 5 },
+        { name: 'Babel', level: 4 },
+        { name: 'RegEx', level: 5 }
+      ]
     },
     {
       id: "quantum-calculator",
       title: "Quantum Calculator",
-      emojis: ['🧮', '🔮', '🌌'],
+      subtitle: "A calculator that gives you results from parallel universes when you divide by zero.",
+      emojis: [
+        { icon: '🧮', meaning: 'Calculation tool' },
+        { icon: '🔮', meaning: 'Quantum physics' },
+        { icon: '🌌', meaning: 'Multiverse exploration' }
+      ],
       description: "A calculator that gives you results from parallel universes when you divide by zero.",
       catReview: "Showed me 9 lives at once",
       stressLevel: 5,
+      techStack: [
+        { name: 'JavaScript', level: 4 },
+        { name: 'Math.js', level: 3 },
+        { name: 'Quantum.js', level: 5 },
+        { name: 'React', level: 3 }
+      ]
     },
     {
       id: "procrastination-engine",
       title: "Procrastination Engine",
-      emojis: ['⏰', '😴', '🚀'],
+      subtitle: "Task management app that generates increasingly convincing excuses the closer you get to deadlines.",
+      emojis: [
+        { icon: '⏰', meaning: 'Time management' },
+        { icon: '😴', meaning: 'Procrastination' },
+        { icon: '🚀', meaning: 'Productivity tool' }
+      ],
       description: "Task management app that generates increasingly convincing excuses the closer you get to deadlines.",
       catReview: "Finally understands my lifestyle",
       stressLevel: 3,
+      techStack: [
+        { name: 'React', level: 4 },
+        { name: 'Express', level: 3 },
+        { name: 'MongoDB', level: 2 }
+      ]
     },
   ];
 
@@ -179,6 +240,8 @@ const Index = () => {
                 description={project.description}
                 catReview={project.catReview}
                 stressLevel={project.stressLevel}
+                subtitle={project.subtitle}
+                techStack={project.techStack}
               />
             ))}
           </div>
