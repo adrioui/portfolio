@@ -71,9 +71,12 @@ const QuirkyPagination: React.FC<QuirkyPaginationProps> = ({
   const playPopSound = () => {
     if (audio) {
       try {
-        audio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAAAAAAAAAAAAAAAAAAABAAgAZGF0YQQAAAB/f39/';
+        // Using a longer, valid base64 WAV data
+        audio.src = 'data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU9PT1AA';
         audio.volume = 0.2;
-        audio.play();
+        audio.play().catch(error => {
+          console.log('Audio playback failed', error);
+        });
       } catch (error) {
         console.log('Audio playback failed', error);
       }
