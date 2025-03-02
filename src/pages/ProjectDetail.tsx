@@ -33,7 +33,6 @@ interface ProjectData {
   }[];
 }
 
-// Sample project data
 const PROJECTS: Record<string, ProjectData> = {
   'cat-treat-dispenser': {
     id: 'cat-treat-dispenser',
@@ -259,11 +258,9 @@ const ProjectDetail: React.FC = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Simulating a data fetch
     if (id && PROJECTS[id]) {
       setProject(PROJECTS[id]);
       
-      // Initialize expanded state for challenges
       const initialExpandedState: Record<string, boolean> = {};
       PROJECTS[id].challenges.forEach(challenge => {
         initialExpandedState[challenge.id] = false;
@@ -271,7 +268,6 @@ const ProjectDetail: React.FC = () => {
       setExpandedChallenges(initialExpandedState);
     }
     
-    // Listen for terminal command inputs
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && e.target instanceof HTMLInputElement) {
         const input = e.target.value.trim().toLowerCase();
@@ -285,7 +281,6 @@ const ProjectDetail: React.FC = () => {
       }
     };
 
-    // Listen for key combinations
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.shiftKey && e.target instanceof HTMLElement) {
         const element = e.target.closest('[data-caffeine]');
@@ -327,7 +322,7 @@ const ProjectDetail: React.FC = () => {
 
   const handleTitleDoubleClick = () => {
     toast({
-      title: "🖼️ ASCII art revealed!",
+      title: "🖼��� ASCII art revealed!",
       description: "Behold, the architectural masterpiece!",
     });
   };
@@ -456,10 +451,12 @@ const ProjectDetail: React.FC = () => {
                     onClick={() => copySnippet(tech.name, tech.snippet || '')}
                     aria-label={`Copy ${tech.name} snippet`}
                   >
-                    <code>{tech.snippet}</code>
-                    <span className="absolute right-2 top-2 text-xs opacity-70 hover:opacity-100 transition-opacity">
-                      {copiedSnippet === tech.name ? '✓' : '📋'}
-                    </span>
+                    <div className="flex justify-between items-start">
+                      <code className="block pr-6">{tech.snippet}</code>
+                      <span className="text-xs flex-shrink-0">
+                        {copiedSnippet === tech.name ? '✓' : '📋'}
+                      </span>
+                    </div>
                   </div>
                 )}
               </div>
