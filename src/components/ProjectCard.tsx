@@ -8,9 +8,9 @@ interface ProjectCardProps {
   emojis: string[];
   description: string;
   catReview: string;
-  stressLevel: number; // 0-5
+  stressLevel: number; // 1-5
   className?: string;
-  id: string; // Added project ID for routing
+  id: string; // Project ID for routing
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -28,7 +28,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <Link 
       to={`/project/${id}`}
-      className={cn("project-card group block", className)}
+      className={cn("project-card group block bg-card hover:bg-card/90 p-6 rounded-lg border border-border/40 transition-colors", className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

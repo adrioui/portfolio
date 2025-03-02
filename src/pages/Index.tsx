@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import Terminal from '@/components/Terminal';
 import ProjectCard from '@/components/ProjectCard';
@@ -7,70 +6,15 @@ import SkillBar from '@/components/SkillBar';
 import QuirkyPagination from '@/components/QuirkyPagination';
 import { initAnimations } from '@/utils/animations';
 import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
+import { useProjects } from '@/hooks/useProjects';
+import { toast } from 'sonner';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   
-  // Projects data array
-  const projects = [
-    {
-      id: "pixel-perfect",
-      title: "Pixel Perfect",
-      emojis: ['🖼️', '⚡', '🪄'],
-      description: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
-      catReview: "Paw-approved API design",
-      stressLevel: 4,
-    },
-    {
-      id: "terminal-tunes",
-      title: "Terminal Tunes",
-      emojis: ['🎵', '💻', '🎮'],
-      description: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
-      catReview: "Makes weird noises while I'm napping",
-      stressLevel: 3,
-    },
-    {
-      id: "recursive-recipes",
-      title: "Recursive Recipes",
-      emojis: ['🍳', '🔄', '🤖'],
-      description: "Recipe generator that creates increasingly absurd cooking instructions the more you use it.",
-      catReview: "Food descriptions made me hungry",
-      stressLevel: 2,
-    },
-    {
-      id: "cat-treat-dispenser",
-      title: "Cat Treat Dispenser",
-      emojis: ['😺', '🍪', '🤖'],
-      description: "IoT device that uses AI to recognize when your cat is being good and dispenses treats accordingly.",
-      catReview: "Finally, the recognition I deserve",
-      stressLevel: 4,
-    },
-    {
-      id: "error-handler",
-      title: "Error Handler",
-      emojis: ['🐛', '🔍', '🧠'],
-      description: "Turns cryptic stack traces into sarcastic, but actually helpful explanations.",
-      catReview: "Fixed my yarn hairball issue",
-      stressLevel: 5,
-    },
-    {
-      id: "quantum-calculator",
-      title: "Quantum Calculator",
-      emojis: ['🧮', '🔮', '🌌'],
-      description: "A calculator that gives you results from parallel universes when you divide by zero.",
-      catReview: "Showed me 9 lives at once",
-      stressLevel: 5,
-    },
-    {
-      id: "procrastination-engine",
-      title: "Procrastination Engine",
-      emojis: ['⏰', '😴', '🚀'],
-      description: "Task management app that generates increasingly convincing excuses the closer you get to deadlines.",
-      catReview: "Finally understands my lifestyle",
-      stressLevel: 3,
-    },
-  ];
-
+  // Fetch projects from Supabase
+  const { data: projects = [], isLoading, isError } = useProjects();
+  
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [isRewinding, setIsRewinding] = useState(false);
@@ -81,6 +25,8 @@ const Index = () => {
   
   // Get current projects with rewind mode support
   const getCurrentProjects = () => {
+    if (isLoading) return [];
+    
     const indexOfLastProject = currentPage * projectsPerPage;
     const indexOfFirstProject = indexOfLastProject - projectsPerPage;
     
@@ -109,7 +55,14 @@ const Index = () => {
     // Initialize animations and easter eggs after component mounts
     initAnimations();
     initEasterEggs();
-  }, []);
+    
+    // Show error toast if project fetch fails
+    if (isError) {
+      toast.error('Failed to load projects', {
+        description: 'Please check your connection and try again'
+      });
+    }
+  }, [isError]);
 
   // Terminal commands for the hero section
   const terminalCommands = [
@@ -177,22 +130,35 @@ const Index = () => {
         <section id="projects" className="py-20">
           <h2 className="section-heading">$ projects</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {currentProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                emojis={project.emojis}
-                description={project.description}
-                catReview={project.catReview}
-                stressLevel={project.stressLevel}
-              />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="animate-pulse bg-card/30 rounded-lg p-6 h-48"></div>
+              ))}
+            </div>
+          ) : projects.length === 0 ? (
+            <div className="text-center py-12 text-softgray">
+              <p className="mb-4">No projects found</p>
+              <p className="text-sm">Check your Supabase connection or add some projects to the database</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {currentProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  id={project.id}
+                  title={project.title}
+                  emojis={project.project_emojis?.map(e => e.icon) || []}
+                  description={project.subtitle}
+                  catReview={project.overview.substring(0, 40) + "..."}
+                  stressLevel={project.stress_level}
+                />
+              ))}
+            </div>
+          )}
           
           {/* Only show pagination if we have more than one page */}
-          {totalPages > 1 && (
+          {!isLoading && totalPages > 1 && (
             <QuirkyPagination
               currentPage={currentPage}
               totalPages={totalPages}
