@@ -7,70 +7,11 @@ import SkillBar from '@/components/SkillBar';
 import QuirkyPagination from '@/components/QuirkyPagination';
 import { initAnimations } from '@/utils/animations';
 import { initEasterEggs, triggerNameAnimation } from '@/utils/easterEggs';
+import { projects } from '@/data/projects';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   
-  // Projects data array
-  const projects = [
-    {
-      id: "pixel-perfect",
-      title: "Pixel Perfect",
-      emojis: ['🖼️', '⚡', '🪄'],
-      description: "A brutalist image editor that uses machine learning to predict what you're trying to draw.",
-      catReview: "Paw-approved API design",
-      stressLevel: 4,
-    },
-    {
-      id: "terminal-tunes",
-      title: "Terminal Tunes",
-      emojis: ['🎵', '💻', '🎮'],
-      description: "CLI music player that visualizes audio as ASCII art patterns in your terminal.",
-      catReview: "Makes weird noises while I'm napping",
-      stressLevel: 3,
-    },
-    {
-      id: "recursive-recipes",
-      title: "Recursive Recipes",
-      emojis: ['🍳', '🔄', '🤖'],
-      description: "Recipe generator that creates increasingly absurd cooking instructions the more you use it.",
-      catReview: "Food descriptions made me hungry",
-      stressLevel: 2,
-    },
-    {
-      id: "cat-treat-dispenser",
-      title: "Cat Treat Dispenser",
-      emojis: ['😺', '🍪', '🤖'],
-      description: "IoT device that uses AI to recognize when your cat is being good and dispenses treats accordingly.",
-      catReview: "Finally, the recognition I deserve",
-      stressLevel: 4,
-    },
-    {
-      id: "error-handler",
-      title: "Error Handler",
-      emojis: ['🐛', '🔍', '🧠'],
-      description: "Turns cryptic stack traces into sarcastic, but actually helpful explanations.",
-      catReview: "Fixed my yarn hairball issue",
-      stressLevel: 5,
-    },
-    {
-      id: "quantum-calculator",
-      title: "Quantum Calculator",
-      emojis: ['🧮', '🔮', '🌌'],
-      description: "A calculator that gives you results from parallel universes when you divide by zero.",
-      catReview: "Showed me 9 lives at once",
-      stressLevel: 5,
-    },
-    {
-      id: "procrastination-engine",
-      title: "Procrastination Engine",
-      emojis: ['⏰', '😴', '🚀'],
-      description: "Task management app that generates increasingly convincing excuses the closer you get to deadlines.",
-      catReview: "Finally understands my lifestyle",
-      stressLevel: 3,
-    },
-  ];
-
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [isRewinding, setIsRewinding] = useState(false);
@@ -114,9 +55,9 @@ const Index = () => {
   // Terminal commands for the hero section
   const terminalCommands = [
     "whoami",
-    "Max",
+    "Adri",
     "Job: Building things that (sometimes) work",
-    "Location: [redacted] • ☕ Infinite coffee mode"
+    "Location: [redacted]"
   ];
 
   // Sections for the scroll indicator
@@ -142,10 +83,10 @@ const Index = () => {
               Software Engineer
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-mono font-bold mb-4">
-              Hi, I'm <span className="relative text-highlight cursor-pointer" onClick={handleNameClick}>Max</span>
+              Hi, I'm <span className="relative text-highlight cursor-pointer" onClick={handleNameClick}>Adri</span>
             </h1>
             <p className="text-softgray text-lg md:text-xl max-w-2xl leading-relaxed">
-              I build digital experiences with clean code and a touch of whimsy. Sometimes they even work.
+              I build digital experiences with a touch of whimsy. Sometimes they even work.
             </p>
           </div>
 
@@ -204,7 +145,7 @@ const Index = () => {
 
         <div className="wave-divider"></div>
 
-        {/* Skills Section */}
+        {/* Skills Section
         <section id="skills" className="py-20">
           <h2 className="section-heading">$ skills</h2>
           
@@ -259,7 +200,7 @@ const Index = () => {
           </div>
         </section>
 
-        <div className="wave-divider"></div>
+        <div className="wave-divider"></div> */}
 
         {/* Contact Section */}
         <section id="contact" className="py-20 pb-32">
@@ -307,7 +248,7 @@ const Index = () => {
         
         <footer className="py-6 border-t border-border text-softgray text-sm">
           <p>Powered by caffeine and existential deadlines</p>
-          <p className="text-xs mt-2">© {new Date().getFullYear()} Max – Hover here for 5 seconds...</p>
+          <p className="text-xs mt-2">© {new Date().getFullYear()} Adri – Hover here for 5 seconds...</p>
         </footer>
       </div>
     </div>
