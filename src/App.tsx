@@ -10,15 +10,19 @@ import ProjectDetail from "./pages/ProjectDetail";
 
 const queryClient = new QueryClient();
 
+// Get the base URL from the environment or use default
+const baseUrl = import.meta.env.BASE_URL || '/';
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/portfolio">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
