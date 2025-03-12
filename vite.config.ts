@@ -7,10 +7,10 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   homepage: "https://adrioui.github.io/portfolio/",
   server: {
-    host: "::",
+    host: "0.0.0.0",
     port: 8080,
   },
-  base: "/portfolio/", // Changed from "./" to "/" for Vercel deployment
+  base: "/", // Changed from "./" to "/" for Vercel deployment
   plugins: [react(), mode === "development" && componentTagger()].filter(
     Boolean
   ),
