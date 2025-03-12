@@ -210,7 +210,7 @@ const Index = () => {
             commands={[
               "contact --method",
               "[1] Carrier pigeon (Preferred)",
-              "[2] Email (adrifdlh@gmail.com)",
+              "[2] Email (max@bonhomme.lol)",
               "[3] Fax (Seriously?)"
             ]} 
             className="mt-12 max-w-2xl" 
@@ -219,7 +219,7 @@ const Index = () => {
           
           <div className="mt-12 flex gap-6">
             <a 
-              href="mailto:adrifdlh@gmail.com" 
+              href="mailto:max@bonhomme.lol" 
               className="link-hover font-mono"
               data-quirk="link"
             >
