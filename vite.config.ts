@@ -5,11 +5,12 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  homepage: "https://adrioui.github.io/portfolio/",
   server: {
     host: "::",
     port: 8080,
   },
-  base: "/", // Changed from "./" to "/" for Vercel deployment
+  base: "/portfolio/", // Changed from "./" to "/" for Vercel deployment
   plugins: [react(), mode === "development" && componentTagger()].filter(
     Boolean
   ),
