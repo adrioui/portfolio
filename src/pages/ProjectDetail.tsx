@@ -276,7 +276,7 @@ const ProjectDetail: React.FC = () => {
         
         <div className="wave-divider"></div>
         
-        <div className="my-12">
+        {/* <div className="my-12">
           <h3 className="section-heading" data-section="demo">Live Demo</h3>
           <a 
             href={project.demoLink} 
@@ -298,7 +298,7 @@ const ProjectDetail: React.FC = () => {
               (⚠️ Bring coffee)
             </span>
           </a>
-        </div>
+        </div> */}
         
         {catTaxVisible && (
           <div className="my-12 p-4 border border-dashed border-highlight animate-fade-in">
